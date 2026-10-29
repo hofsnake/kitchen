@@ -142,7 +142,7 @@ html,body{height:100%;overflow:hidden}
   </div>
   <div class="col">
     <div class="card" style="padding:2vmin">
-      <div class="label">Timers <span style="text-transform:none;letter-spacing:0;color:#666">(hold a + button to change it)</span></div>
+      <div class="label">Timers</div>
       <div id="timers"></div>
     </div>
     <div class="card">
@@ -295,14 +295,13 @@ function fmt(ms){
   return h>0?h+":"+pad(m)+":"+pad(sec):pad(m)+":"+pad(sec);
 }
 function left(t){return t.run?Math.max(0,t.end-Date.now()):t.rem;}
-var PRE=lsGet("kitchenPresets")||[3,8,15];
-function presetBtns(i){var h="",j;for(j=0;j<3;j++)h+='<button class="btn add" data-a="add" data-i="'+i+'" data-j="'+j+'" data-m="'+PRE[j]+'">+'+PRE[j]+'</button>';return h;}
-function editPreset(j){var v=prompt("Minutes for this button:",PRE[j]);if(v===null)return;v=parseInt(v,10);if(!(v>0&&v<=600)){alert("Enter minutes from 1 to 600");return;}PRE[j]=v;lsSet("kitchenPresets",PRE);buildTimers();paint();}
 function buildTimers(){
   var h="",i;
   for(i=0;i<2;i++){
     h+='<div class="timer" id="t'+i+'"><div class="tname">'+NAMES[i]+'</div><div class="tdisp" id="d'+i+'">00:00</div>'+
-    '<div class="row">'+presetBtns(i)+
+    '<div class="row"><button class="btn add" data-a="add" data-i="'+i+'" data-m="1">+1</button>'+
+    '<button class="btn add" data-a="add" data-i="'+i+'" data-m="5">+5</button>'+
+    '<button class="btn add" data-a="add" data-i="'+i+'" data-m="10">+10</button>'+
     '<button class="btn go" id="g'+i+'" data-a="go" data-i="'+i+'">Start</button>'+
     '<button class="btn rst" data-a="reset" data-i="'+i+'">Reset</button></div></div>';
   }
@@ -368,17 +367,7 @@ function act(a,i,m){
   }
   save();paint();
 }
-var holdT=null,held=false;
-function presetOf(e){var n=e.target;while(n&&n.getAttribute&&!n.getAttribute("data-j"))n=n.parentNode;return n&&n.getAttribute?n:null;}
-function holdStart(e){var n=presetOf(e);held=false;if(!n)return;holdT=setTimeout(function(){held=true;editPreset(parseInt(n.getAttribute("data-j"),10));},700);}
-function holdEnd(){if(holdT){clearTimeout(holdT);holdT=null;}}
-$("timers").addEventListener("touchstart",holdStart,false);
-$("timers").addEventListener("mousedown",holdStart,false);
-$("timers").addEventListener("touchend",holdEnd,false);
-$("timers").addEventListener("touchmove",holdEnd,false);
-$("timers").addEventListener("mouseup",holdEnd,false);
 $("timers").addEventListener("click",function(e){
-  if(held){held=false;return;}
   var n=e.target;
   while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-a")))n=n.parentNode;
   if(!n||n===this)return;
