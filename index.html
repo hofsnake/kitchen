@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kitchen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kitchen">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#000000">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAEsUlEQVR42u2dUXIbIRBELcoXkC6WM+hkOUMuphwh+fKHE1mGXWC6Z17/2VWqYoa3zcCycLler28IPVMjBQg4EHAg4EDAgYADAQcCDgQcCDgQcCAEHAg4EHAg4EDAgYADAQcCDgQcCDgQAg4EHOi43muG/fj5e/Qnt3u5D3wuRT5qOkADrGSGYzoQ1UDJBsc2ICqAkgeOcCzyIWIPhxQTySgxhkMciwSIWMJhhIU1ImZwmGJhiogNHAmwsEPEA44VZAx1T3gDgGNtr0zsDM1W1YLjfB9sSL1FI7PBcSbpIem2a7AlHIezLJJi9/brwnEss4JPXoJAtODIt83COiIhOEbzaLSaZBpaI30bNNpakRU/CecYyoX1e06vSBv5krWQcP8Ido7++JNtxbMIvJEgcQsJ9I8GGfChBQdkWPARUHN0xlnqIyLNnLy7P1Jne+XxeNWM221bvIK7mZrgI1Lww8POqDcD1NTIQDo5bGpR1bSNodi38dEcswMfqeCg1HAsPhpkwIfHsIJqTWWxDV/zaBZZgI+EzsHChsgCgaVzYBvK+WmBUEPGFD7WmQezFbQdDmwjgXngHEgMDmzDImNL4GAGm2NO24o8BJiHBBzYRhrzoCBFMnAwphhlD+dAu+Cg4MhUdmx1DsYUrxwyrCDgQLFwUHAkKzv2OQcFh10mGVYQcCDgQBM17XwO+2r01+XTnz/+WNekU+qSTYe3SFej/2Dx6Z+izd5z2Ev5YeUpGUzOgaOn7yvz0SADPoADAccaM6hpHjgHip7KZjCbjxNLtx1OinNYUvL6aFvgAJH8iBSFY3jF9ovV9NyI4By4CHCcMY++l3D5ECntHF18DL6ezYRI9WHlGz6Ovrh/fAg4OpIlvMJ4u1//R+R2v07Z0rEIkT35nHlT0+sW+24wntW7E1fP9qSa2UpXp07pV7uBBjh2IwIcILJ8ZEkFR6a33rEuYnlTU7Vv2kYR2cPTxF5gWKEW+VLs55iGyOt5ryNAXB1qZiTGV4fyKf1TRHbebM1UFhdJN6y8ldzGvW3V3B4OVNo5KDvCLGp25gOcg6PDXPLWLBBGITlvRR4CbIOCFDnAEXjhZUHbWDSO4xwoAg7Mw9o24p0DPpTzsxYO5rSOM1ihmgPzkM1MU0AbPo7lZLUxM1tBoXBgHo62sc854MOODLlhBT6kMiB3U1NlPjpjz3lTE8seXjlUvK68pnnolBrqU9lqfGjGO/PwlhW5SD8SKacixjn648xtIeIPSdiwAh/69hlZc1Tmw2Jgjak5Dnd8ghLEKN742cpQ/O4W4vUkxDvHsV63sxDHAFXWOUZz4WUhpuirOMfhLhe3EOuItOA4bAmCiCQIRA6OM0OGSGbd2y8Nx/mqIiTLdg02hmNK1bkh6RaNTAjH3FnJxD7QbFU5ONZNXMMX3/SXajzgeEv3esViEc8GjjSIGK3tmsFhjYjdkr8lHHaImL5MNobDAhHrPQb2cGhSkmPrax44RBDJtCM6GxwhoGTdIp8ZjqWgVPh6rwoc51kp+C1nUThQjzjZBwEHAg4EHAg4EHAg4EDAgYADAQcCDoSAAwEHAg4EHAg4EHAg4EDAgYADAQdCwIG+118qiCnyGkbqvgAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAEsUlEQVR42u2dUXIbIRBELcoXkC6WM+hkOUMuphwh+fKHE1mGXWC6Z17/2VWqYoa3zcCycLler28IPVMjBQg4EHAg4EDAgYADAQcCDgQcCDgQcCAEHAg4EHAg4EDAgYADAQcCDgQcCDgQAg4EHOi43muG/fj5e/Qnt3u5D3wuRT5qOkADrGSGYzoQ1UDJBsc2ICqAkgeOcCzyIWIPhxQTySgxhkMciwSIWMJhhIU1ImZwmGJhiogNHAmwsEPEA44VZAx1T3gDgGNtr0zsDM1W1YLjfB9sSL1FI7PBcSbpIem2a7AlHIezLJJi9/brwnEss4JPXoJAtODIt83COiIhOEbzaLSaZBpaI30bNNpakRU/CecYyoX1e06vSBv5krWQcP8Ido7++JNtxbMIvJEgcQsJ9I8GGfChBQdkWPARUHN0xlnqIyLNnLy7P1Jne+XxeNWM221bvIK7mZrgI1Lww8POqDcD1NTIQDo5bGpR1bSNodi38dEcswMfqeCg1HAsPhpkwIfHsIJqTWWxDV/zaBZZgI+EzsHChsgCgaVzYBvK+WmBUEPGFD7WmQezFbQdDmwjgXngHEgMDmzDImNL4GAGm2NO24o8BJiHBBzYRhrzoCBFMnAwphhlD+dAu+Cg4MhUdmx1DsYUrxwyrCDgQLFwUHAkKzv2OQcFh10mGVYQcCDgQBM17XwO+2r01+XTnz/+WNekU+qSTYe3SFej/2Dx6Z+izd5z2Ev5YeUpGUzOgaOn7yvz0SADPoADAccaM6hpHjgHip7KZjCbjxNLtx1OinNYUvL6aFvgAJH8iBSFY3jF9ovV9NyI4By4CHCcMY++l3D5ECntHF18DL6ezYRI9WHlGz6Ovrh/fAg4OpIlvMJ4u1//R+R2v07Z0rEIkT35nHlT0+sW+24wntW7E1fP9qSa2UpXp07pV7uBBjh2IwIcILJ8ZEkFR6a33rEuYnlTU7Vv2kYR2cPTxF5gWKEW+VLs55iGyOt5ryNAXB1qZiTGV4fyKf1TRHbebM1UFhdJN6y8ldzGvW3V3B4OVNo5KDvCLGp25gOcg6PDXPLWLBBGITlvRR4CbIOCFDnAEXjhZUHbWDSO4xwoAg7Mw9o24p0DPpTzsxYO5rSOM1ihmgPzkM1MU0AbPo7lZLUxM1tBoXBgHo62sc854MOODLlhBT6kMiB3U1NlPjpjz3lTE8seXjlUvK68pnnolBrqU9lqfGjGO/PwlhW5SD8SKacixjn648xtIeIPSdiwAh/69hlZc1Tmw2Jgjak5Dnd8ghLEKN742cpQ/O4W4vUkxDvHsV63sxDHAFXWOUZz4WUhpuirOMfhLhe3EOuItOA4bAmCiCQIRA6OM0OGSGbd2y8Nx/mqIiTLdg02hmNK1bkh6RaNTAjH3FnJxD7QbFU5ONZNXMMX3/SXajzgeEv3esViEc8GjjSIGK3tmsFhjYjdkr8lHHaImL5MNobDAhHrPQb2cGhSkmPrax44RBDJtCM6GxwhoGTdIp8ZjqWgVPh6rwoc51kp+C1nUThQjzjZBwEHAg4EHAg4EHAg4EDAgYADAQcCDoSAAwEHAg4EHAg4EHAg4EDAgYADAQdCwIG+118qiCnyGkbqvgAAAABJRU5ErkJggg==">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html,body{margin:0;padding:0;background:#000;color:#fff;height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;-webkit-user-select:none;user-select:none}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+button,a.btn{font-family:inherit}
+#app{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;min-height:100%;padding:2vmin}
+#main{display:-webkit-flex;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-flex:1 1 auto;flex:1 1 auto}
+.col{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-flex:1 1 0;flex:1 1 0;min-width:0}
+.col+.col{margin-left:2vmin}
+.card{background:#161616;border:2px solid #2a2a2a;border-radius:2.2vmin;padding:2vmin;margin-bottom:2vmin}
+.card:last-child{margin-bottom:0}
+.label{font-size:2.4vmin;letter-spacing:.12em;text-transform:uppercase;color:#9a9a9a;margin-bottom:1vmin;font-weight:600}
+/* clock */
+#time{font-size:17vmin;line-height:1;font-weight:700;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+#ampm{font-size:6vmin;color:#ffb000;margin-left:1vmin;font-weight:600}
+#date{font-size:4.6vmin;color:#ddd;margin-top:1.2vmin;font-weight:500}
+/* weather */
+#wx{display:-webkit-flex;display:flex;-webkit-align-items:baseline;align-items:baseline;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+#temp{font-size:11vmin;font-weight:700;line-height:1;color:#7fd6ff}
+#cond{font-size:4.6vmin;margin-left:3vmin;color:#fff}
+#hilo{font-size:4.2vmin;color:#ddd;margin-top:1vmin}
+#wxnote{font-size:2.6vmin;color:#888;margin-top:1vmin}
+/* timers */
+.timer{background:#101820;border:2px solid #25323f;border-radius:2.2vmin;padding:1.6vmin;margin-bottom:1.6vmin}
+.timer:last-child{margin-bottom:0}
+.timer.running{border-color:#2ecc71}
+.timer.done{border-color:#ff3b30}
+.tname{font-size:2.6vmin;color:#9fb4c7;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.tdisp{font-size:10vmin;font-weight:700;line-height:1.05;margin:.4vmin 0 1vmin;font-variant-numeric:tabular-nums;white-space:nowrap}
+.timer.running .tdisp{color:#2ecc71}
+.timer.done .tdisp{color:#ff3b30}
+.row{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:-.6vmin}
+.row>*{margin:.6vmin}
+.btn{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
+  min-height:80px;min-width:80px;padding:0 3vmin;font-size:3.8vmin;font-weight:700;color:#fff;background:#2b2b2b;border:2px solid #444;
+  border-radius:2vmin;text-decoration:none;text-align:center;cursor:pointer;-webkit-appearance:none;appearance:none}
+.btn:active{background:#555}
+.btn.add{-webkit-flex:1 1 0;flex:1 1 0;padding:0 1vmin;background:#1d3550;border-color:#2f5a8a}
+.btn.go{-webkit-flex:1.6 1 0;flex:1.6 1 0;padding:0 1vmin;background:#1f7a3f;border-color:#2ecc71}
+.btn.pause{background:#8a5a00;border-color:#ffb000}
+.btn.rst{-webkit-flex:1.4 1 0;flex:1.4 1 0;padding:0 1vmin;font-size:3.4vmin;background:#3a1d1d;border-color:#7a3030}
+/* events */
+#events{font-size:4vmin}
+.ev{display:-webkit-flex;display:flex;padding:1.2vmin 0;border-bottom:1px solid #2a2a2a}
+.ev:last-child{border-bottom:0}
+.evt{width:22vmin;-webkit-flex:none;flex:none;color:#ffb000;font-weight:700}
+.evn{-webkit-flex:1;flex:1;color:#fff}
+.evl{display:block;font-size:2.8vmin;color:#999;font-weight:400}
+.none{color:#aaa;font-size:3.8vmin}
+/* links */
+#links .btn{-webkit-flex:1 1 28%;flex:1 1 28%;min-height:80px;font-size:3.8vmin;padding:0 1vmin;background:#222;border-color:#555}
+#links .btn.any{background:#0d4b2a;border-color:#2ecc71}
+#links .btn.yt{background:#4a1111;border-color:#ff4a4a}
+/* alarm overlay */
+#alarm{display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:9;background:#ff3b30;color:#fff;
+  -webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
+  -webkit-flex-direction:column;flex-direction:column;text-align:center;padding:4vmin}
+#alarm.on{display:-webkit-flex;display:flex}
+#alarm.alt{background:#fff;color:#c00}
+#alarm .big{font-size:16vmin;font-weight:800}
+#alarm .sm{font-size:6vmin;margin-top:2vmin}
+/* portrait: stack */
+@media (orientation:portrait){
+  #main{-webkit-flex-direction:column;flex-direction:column}
+  .col+.col{margin-left:0;margin-top:2vmin}
+  #time{font-size:22vmin}
+  .tdisp{font-size:15vmin}
+  .btn{font-size:3.6vmin}
+}
+</style>
+</head>
+<body>
+<div id="app">
+ <div id="main">
+  <div class="col">
+    <div class="card">
+      <div id="time">--:--<span id="ampm"></span></div>
+      <div id="date">&nbsp;</div>
+    </div>
+    <div class="card">
+      <div class="label">San Angelo, TX</div>
+      <div id="wx"><span id="temp">--&deg;</span><span id="cond">Loading weather</span></div>
+      <div id="hilo">&nbsp;</div>
+      <div id="wxnote"></div>
+    </div>
+<div class="card" id="links">
+      <div class="label">Go to</div>
+      <div class="row">
+        <a class="btn any" target="_blank" rel="noopener" href="https://www.anylist.com/web">AnyList</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.allrecipes.com/">AllRecipes</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.foodnetwork.com/">Food Network</a>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.heb.com/recipes">HEB Recipes</a>
+        <a class="btn yt" target="_blank" rel="noopener" href="https://www.youtube.com/">YouTube</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card" style="padding:2vmin">
+      <div class="label">Timers</div>
+      <div id="timers"></div>
+    </div>
+    <div class="card">
+      <div class="label">Today</div>
+      <div id="events"><div class="none">No events loaded</div></div>
+      <div id="evnote" class="none" style="font-size:2.6vmin;margin-top:1vmin;color:#777"></div>
+    </div>
+  </div>
+ </div>
+</div>
+<div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
+
+<script>
+(function(){
+"use strict";
+var TZ="America/Chicago";
+function $(id){return document.getElementById(id);}
+function pad(n){return n<10?"0"+n:""+n;}
+function lsGet(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function xhr(url,cb){
+  var x=new XMLHttpRequest();
+  x.open("GET",url,true);
+  x.timeout=15000;
+  x.onload=function(){
+    if(x.status>=200&&x.status<300){try{cb(null,JSON.parse(x.responseText));}catch(e){cb(e);}}
+    else cb(new Error("http "+x.status));
+  };
+  x.onerror=function(){cb(new Error("network"));};
+  x.ontimeout=function(){cb(new Error("timeout"));};
+  try{x.send();}catch(e){cb(e);}
+}
+
+/* ---------- Clock ---------- */
+var tfmt=null,dfmt=null,ymd=null;
+try{
+  tfmt=new Intl.DateTimeFormat("en-US",{timeZone:TZ,hour:"numeric",minute:"2-digit",hour12:true});
+  dfmt=new Intl.DateTimeFormat("en-US",{timeZone:TZ,weekday:"long",month:"long",day:"numeric"});
+  ymd=new Intl.DateTimeFormat("en-US",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit"});
+}catch(e){}
+function todayStr(){
+  var d=new Date();
+  if(ymd){var m=/(\d+)\/(\d+)\/(\d+)/.exec(ymd.format(d));if(m)return m[3]+"-"+m[1]+"-"+m[2];}
+  return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+}
+var lastMin="";
+function tickClock(){
+  var d=new Date(),t,ds;
+  if(tfmt){t=tfmt.format(d);ds=dfmt.format(d);}
+  else{var h=d.getHours();t=((h%12)||12)+":"+pad(d.getMinutes())+(h<12?" AM":" PM");ds=d.toDateString();}
+  if(t!==lastMin){
+    lastMin=t;
+    var m=/^(.*?)\s*(AM|PM)$/.exec(t);
+    $("time").firstChild.nodeValue=m?m[1]:t;
+    $("ampm").firstChild.nodeValue=m?m[2]:"";
+    $("date").firstChild.nodeValue=ds;
+  }
+}
+
+/* ---------- Weather ---------- */
+var WX={0:"Clear",1:"Mostly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Fog",51:"Light drizzle",53:"Drizzle",55:"Heavy drizzle",
+56:"Freezing drizzle",57:"Freezing drizzle",61:"Light rain",63:"Rain",65:"Heavy rain",66:"Freezing rain",67:"Freezing rain",
+71:"Light snow",73:"Snow",75:"Heavy snow",77:"Snow grains",80:"Light showers",81:"Showers",82:"Heavy showers",85:"Snow showers",86:"Snow showers",
+95:"Thunderstorm",96:"Thunderstorm, hail",99:"Thunderstorm, hail"};
+var WURL="https://api.open-meteo.com/v1/forecast?latitude=31.4638&longitude=-100.4370&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FChicago&forecast_days=1";
+function showWx(w,stale){
+  $("temp").firstChild.nodeValue=Math.round(w.t)+"\u00B0";
+  $("cond").firstChild.nodeValue=WX[w.c]||"";
+  $("hilo").firstChild.nodeValue="High "+Math.round(w.hi)+"\u00B0   Low "+Math.round(w.lo)+"\u00B0";
+  $("wxnote").firstChild.nodeValue=(stale?"Offline, showing last reading from ":"Updated ")+w.at;
+}
+function loadWx(){
+  xhr(WURL,function(err,j){
+    if(err||!j||!j.current||!j.daily){
+      var c=lsGet("k_wx");
+      if(c){showWx(c,true);}
+      else{$("cond").firstChild.nodeValue="Weather unavailable";$("temp").firstChild.nodeValue="--\u00B0";}
+      return;
+    }
+    var d=new Date(),t=tfmt?tfmt.format(d):pad(d.getHours())+":"+pad(d.getMinutes());
+    var w={t:j.current.temperature_2m,c:j.current.weather_code,hi:j.daily.temperature_2m_max[0],lo:j.daily.temperature_2m_min[0],at:t};
+    lsSet("k_wx",w);showWx(w,false);
+  });
+}
+
+/* ---------- Events ---------- */
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function renderEvents(j){
+  var box=$("events"),note=$("evnote"),today=todayStr();
+  var list=(j&&j.events)||[];
+  if(!j||!j.date){box.innerHTML='<div class="none">No events loaded</div>';note.innerHTML="";return;}
+  var stale=j.date&&j.date!==today;
+  if(stale||!list.length){
+    box.innerHTML='<div class="none">'+(stale?"No events loaded for today":(list.length?"":"Nothing on the calendar today"))+'</div>';
+  }else{
+    var h="";
+    for(var i=0;i<list.length;i++){
+      var e=list[i];
+      h+='<div class="ev"><div class="evt">'+esc(e.time||"All day")+'</div><div class="evn">'+esc(e.title)+(e.location?'<span class="evl">'+esc(e.location)+'</span>':"")+'</div></div>';
+    }
+    box.innerHTML=h;
+  }
+  note.innerHTML=j.updated?"Calendar updated "+esc(j.updated):"";
+}
+function loadEvents(){
+  xhr("events.json?t="+(new Date().getTime()),function(err,j){
+    if(err){var c=lsGet("k_ev");renderEvents(c||null);return;}
+    lsSet("k_ev",j);renderEvents(j);
+  });
+}
+
+/* ---------- Audio ---------- */
+var AC=null;
+function unlockAudio(){
+  try{
+    var C=window.AudioContext||window.webkitAudioContext;
+    if(!C)return;
+    if(!AC)AC=new C();
+    if(AC.state==="suspended"&&AC.resume)AC.resume();
+  }catch(e){}
+}
+function beepBurst(){
+  if(!AC)return;
+  try{
+    var now=AC.currentTime,i;
+    for(i=0;i<3;i++){
+      var o=AC.createOscillator(),g=AC.createGain();
+      o.type="square";o.frequency.value=i%2?988:880;
+      g.gain.setValueAtTime(0.0001,now+i*0.22);
+      g.gain.linearRampToValueAtTime(0.9,now+i*0.22+0.01);
+      g.gain.setValueAtTime(0.9,now+i*0.22+0.15);
+      g.gain.linearRampToValueAtTime(0.0001,now+i*0.22+0.18);
+      o.connect(g);g.connect(AC.destination);
+      o.start(now+i*0.22);o.stop(now+i*0.22+0.2);
+    }
+  }catch(e){}
+}
+document.addEventListener("touchstart",unlockAudio,false);
+document.addEventListener("click",unlockAudio,false);
+
+/* ---------- Timers ---------- */
+var NAMES=["Timer 1","Timer 2"];
+var T=lsGet("k_timers");
+if(!T||T.length!==2)T=[{rem:0,end:0,run:false,done:false},{rem:0,end:0,run:false,done:false}];
+function save(){lsSet("k_timers",T);}
+function fmt(ms){
+  var s=Math.ceil(ms/1000);if(s<0)s=0;
+  var h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  return h>0?h+":"+pad(m)+":"+pad(sec):pad(m)+":"+pad(sec);
+}
+function left(t){return t.run?Math.max(0,t.end-Date.now()):t.rem;}
+function buildTimers(){
+  var h="",i;
+  for(i=0;i<2;i++){
+    h+='<div class="timer" id="t'+i+'"><div class="tname">'+NAMES[i]+'</div><div class="tdisp" id="d'+i+'">00:00</div>'+
+    '<div class="row"><button class="btn add" data-a="add" data-i="'+i+'" data-m="1">+1</button>'+
+    '<button class="btn add" data-a="add" data-i="'+i+'" data-m="5">+5</button>'+
+    '<button class="btn add" data-a="add" data-i="'+i+'" data-m="10">+10</button>'+
+    '<button class="btn go" id="g'+i+'" data-a="go" data-i="'+i+'">Start</button>'+
+    '<button class="btn rst" data-a="reset" data-i="'+i+'">Reset</button></div></div>';
+  }
+  $("timers").innerHTML=h;
+}
+function paint(){
+  var i;
+  for(i=0;i<2;i++){
+    var t=T[i],el=$("t"+i),l=left(t);
+    $("d"+i).firstChild.nodeValue=t.done?"00:00":fmt(l);
+    el.className="timer"+(t.run?" running":"")+(t.done?" done":"");
+    var g=$("g"+i);
+    g.firstChild.nodeValue=t.run?"Pause":"Start";
+    g.className="btn go"+(t.run?" pause":"");
+  }
+}
+var ringing=-1,ringStart=0,beepTimer=null,flashTimer=null;
+function startAlarm(i){
+  if(ringing>=0)return;
+  ringing=i;ringStart=Date.now();
+  $("alarmname").firstChild.nodeValue=NAMES[i];
+  $("alarm").className="on";
+  unlockAudio();beepBurst();
+  beepTimer=setInterval(function(){
+    if(Date.now()-ringStart>90000){stopAlarm();return;}
+    beepBurst();
+  },900);
+  var alt=false;
+  flashTimer=setInterval(function(){alt=!alt;$("alarm").className=alt?"on alt":"on";},450);
+  if(navigator.vibrate){try{navigator.vibrate([400,200,400]);}catch(e){}}
+}
+function stopAlarm(){
+  if(beepTimer){clearInterval(beepTimer);beepTimer=null;}
+  if(flashTimer){clearInterval(flashTimer);flashTimer=null;}
+  $("alarm").className="";
+  if(ringing>=0){T[ringing].done=false;T[ringing].rem=0;save();}
+  ringing=-1;paint();
+}
+$("alarm").addEventListener("click",stopAlarm,false);
+$("alarm").addEventListener("touchend",function(e){e.preventDefault();stopAlarm();},false);
+
+function checkTimers(){
+  var i,t;
+  for(i=0;i<2;i++){
+    t=T[i];
+    if(t.run&&Date.now()>=t.end){t.run=false;t.rem=0;t.done=true;save();startAlarm(i);}
+  }
+  paint();
+}
+function act(a,i,m){
+  var t=T[i];
+  unlockAudio();
+  if(t.done&&a!=="reset"){t.done=false;t.rem=0;}
+  if(a==="add"){
+    if(t.run)t.end+=m*60000;else t.rem+=m*60000;
+    if(t.rem>99*3600000)t.rem=99*3600000;
+  }else if(a==="go"){
+    if(t.run){t.rem=Math.max(0,t.end-Date.now());t.run=false;}
+    else if(t.rem>0){t.end=Date.now()+t.rem;t.run=true;}
+  }else if(a==="reset"){
+    t.run=false;t.rem=0;t.end=0;t.done=false;
+    if(ringing===i)stopAlarm();
+  }
+  save();paint();
+}
+$("timers").addEventListener("click",function(e){
+  var n=e.target;
+  while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-a")))n=n.parentNode;
+  if(!n||n===this)return;
+  act(n.getAttribute("data-a"),parseInt(n.getAttribute("data-i"),10),parseInt(n.getAttribute("data-m")||"0",10));
+},false);
+
+/* ---------- Boot ---------- */
+buildTimers();
+if(!$("ampm").firstChild)$("ampm").appendChild(document.createTextNode(""));
+if(!$("wxnote").firstChild)$("wxnote").appendChild(document.createTextNode(""));
+tickClock();
+// timers that finished while the page was closed
+(function(){
+  var i;
+  for(i=0;i<2;i++){
+    if(T[i].run&&Date.now()>=T[i].end){T[i].run=false;T[i].rem=0;T[i].done=true;}
+  }
+  save();
+})();
+paint();
+setInterval(function(){tickClock();checkTimers();},500);
+loadWx();setInterval(loadWx,30*60*1000);
+loadEvents();setInterval(loadEvents,10*60*1000);
+// when the iPad wakes or the app returns to the front, refresh everything
+document.addEventListener("visibilitychange",function(){
+  if(!document.hidden){tickClock();checkTimers();loadWx();loadEvents();getLock();}
+},false);
+// keep the screen on where Safari supports it
+var lock=null;
+function getLock(){
+  try{if(navigator.wakeLock&&navigator.wakeLock.request){navigator.wakeLock.request("screen").then(function(l){lock=l;},function(){});}}catch(e){}
+}
+getLock();
+document.addEventListener("touchstart",function once(){getLock();document.removeEventListener("touchstart",once,false);},false);
+// a timer that finished while the app was closed rings once on open
+(function(){var i;for(i=0;i<2;i++){if(T[i].done){startAlarm(i);break;}}})();
+})();
+</script>
+</body>
+</html>
