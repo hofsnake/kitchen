@@ -376,5 +376,49 @@ document.addEventListener("touchstart",function once(){getLock();document.remove
 (function(){var i;for(i=0;i<2;i++){if(T[i].done){startAlarm(i);break;}}})();
 })();
 </script>
+
+<section id="myrecipes" style="margin:24px 16px;padding:20px;background:#1a1f26;border-radius:16px;color:#fff">
+  <h2 style="font-size:2.2em;margin:0 0 12px">My Recipes</h2>
+  <div id="rlist"></div>
+  <button class="btn" id="radd" style="width:100%;padding:24px 0;font-size:1.8em;margin-top:12px">+ Add a Recipe</button>
+  <div id="rform" style="display:none;margin-top:16px">
+    <input id="rt" placeholder="Recipe name" style="width:100%;box-sizing:border-box;font-size:1.6em;padding:14px;margin-bottom:10px">
+    <textarea id="ri" placeholder="Ingredients, one per line" rows="6" style="width:100%;box-sizing:border-box;font-size:1.4em;padding:14px;margin-bottom:10px"></textarea>
+    <textarea id="rs" placeholder="Instructions" rows="8" style="width:100%;box-sizing:border-box;font-size:1.4em;padding:14px;margin-bottom:10px"></textarea>
+    <button class="btn go" id="rsave" style="width:48%;padding:22px 0;font-size:1.6em">Save</button>
+    <button class="btn rst" id="rcancel" style="width:48%;padding:22px 0;font-size:1.6em;float:right">Cancel</button>
+  </div>
+  <div id="rview" style="display:none;margin-top:16px;font-size:1.5em;line-height:1.5"></div>
+</section>
+<script>
+(function(){
+var K='kitchenRecipes',edit=-1;
+function load(){try{return JSON.parse(localStorage.getItem(K))||[]}catch(e){return []}}
+function save(a){localStorage.setItem(K,JSON.stringify(a))}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function $(i){return document.getElementById(i)}
+function list(){var a=load(),h='';
+ if(!a.length)h='<p style="font-size:1.4em;opacity:.7">No recipes yet. Tap Add a Recipe.</p>';
+ for(var i=0;i<a.length;i++)h+='<button class="btn" data-r="'+i+'" style="display:block;width:100%;text-align:left;padding:20px;font-size:1.6em;margin:8px 0">'+esc(a[i].t)+'</button>';
+ $('rlist').innerHTML=h;}
+function show(i){var r=load()[i];if(!r)return;var ing=r.i.split('\n'),h='<h3 style="font-size:1.6em">'+esc(r.t)+'</h3><b>Ingredients</b><ul>';
+ for(var j=0;j<ing.length;j++)if(ing[j].trim())h+='<li>'+esc(ing[j])+'</li>';
+ h+='</ul><b>Instructions</b><p style="white-space:pre-wrap">'+esc(r.s)+'</p>'+
+ '<button class="btn" id="redit" style="width:32%;padding:20px 0;font-size:1.3em">Edit</button> '+
+ '<button class="btn rst" id="rdel" style="width:32%;padding:20px 0;font-size:1.3em">Delete</button> '+
+ '<button class="btn" id="rclose" style="width:32%;padding:20px 0;font-size:1.3em">Close</button>';
+ var v=$('rview');v.innerHTML=h;v.style.display='block';$('rform').style.display='none';
+ $('rclose').onclick=function(){v.style.display='none'};
+ $('rdel').onclick=function(){if(confirm('Delete '+r.t+'?')){var a=load();a.splice(i,1);save(a);v.style.display='none';list();}};
+ $('redit').onclick=function(){edit=i;$('rt').value=r.t;$('ri').value=r.i;$('rs').value=r.s;v.style.display='none';$('rform').style.display='block';};}
+$('rlist').onclick=function(e){var b=e.target;if(b.getAttribute('data-r')!==null)show(+b.getAttribute('data-r'));};
+$('radd').onclick=function(){edit=-1;$('rt').value=$('ri').value=$('rs').value='';$('rview').style.display='none';$('rform').style.display='block';};
+$('rcancel').onclick=function(){$('rform').style.display='none'};
+$('rsave').onclick=function(){var t=$('rt').value.trim();if(!t){alert('Give it a name');return}
+ var a=load(),r={t:t,i:$('ri').value,s:$('rs').value};if(edit>=0)a[edit]=r;else a.push(r);
+ a.sort(function(x,y){return x.t.toLowerCase()<y.t.toLowerCase()?-1:1});save(a);$('rform').style.display='none';list();};
+list();
+})();
+</script>
 </body>
 </html>
