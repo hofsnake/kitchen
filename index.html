@@ -83,6 +83,35 @@ button,a.btn{font-family:inherit}
   .tdisp{font-size:15vmin}
   .btn{font-size:3.6vmin}
 }
+
+/* fit one screen */
+html,body{height:100%;overflow:hidden}
+#app{height:100%;min-height:0;padding:1.5vmin}
+#main{min-height:0}
+.card{padding:1.4vmin;margin-bottom:1.4vmin}
+.col+.col{margin-left:1.5vmin}
+.label{font-size:2vmin;margin-bottom:.6vmin}
+#time{font-size:13vmin}
+#ampm{font-size:5vmin}
+#date{font-size:3.6vmin;margin-top:.6vmin}
+#temp{font-size:8.5vmin}
+#cond{font-size:3.8vmin}
+#hilo{font-size:3.4vmin;margin-top:.4vmin}
+#wxnote{font-size:2.2vmin;margin-top:.3vmin}
+.timer{padding:1.2vmin;margin-bottom:1.2vmin}
+.tdisp{font-size:8vmin;margin:.2vmin 0 .6vmin}
+.btn{min-height:7vmin;font-size:3vmin}
+.btn.rst{font-size:2.8vmin}
+#links .btn{min-height:7vmin;font-size:2.9vmin}
+#links .btn.foodie{background:#e8772e;border-color:#ffa060}
+#events{font-size:3.2vmin}
+.ev{padding:.6vmin 0}
+.btn.ask{background:#1d9bf0;border-color:#5bb8f5;font-size:4vmin;min-height:9vmin;-webkit-flex:none;flex:none}
+@media (orientation:portrait){
+  html,body{overflow:auto}
+  #time{font-size:18vmin}.tdisp{font-size:12vmin}
+  .col+.col{margin-left:0;margin-top:1.5vmin}
+}
 </style>
 </head>
 <body>
@@ -107,7 +136,7 @@ button,a.btn{font-family:inherit}
         <a class="btn" target="_blank" rel="noopener" href="https://www.foodnetwork.com/">Food Network</a>
         <a class="btn" target="_blank" rel="noopener" href="https://www.heb.com/recipes">HEB Recipes</a>
         <a class="btn yt" target="_blank" rel="noopener" href="https://www.youtube.com/">YouTube</a>
-        <a class="btn" href="grokbot://app/v1/agent?id=d9c86fc8-4785-4529-8fc7-cec66682b4ae" style="display:block;width:100%;box-sizing:border-box;margin-top:16px;padding:28px 0;font-size:2.2em;font-weight:700;text-align:center;background:#1d9bf0;color:#fff">Ask Grok Bot</a>
+        <a class="btn foodie" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg">Foodie Recipes</a>
       </div>
     </div>
   </div>
@@ -121,6 +150,7 @@ button,a.btn{font-family:inherit}
       <div id="events"><div class="none">No events loaded</div></div>
       <div id="evnote" class="none" style="font-size:2.6vmin;margin-top:1vmin;color:#777"></div>
     </div>
+    <a class="btn ask" href="grokbot://app/v1/agent?id=d9c86fc8-4785-4529-8fc7-cec66682b4ae">Ask Grok Bot</a>
   </div>
  </div>
 </div>
@@ -376,9 +406,5 @@ document.addEventListener("touchstart",function once(){getLock();document.remove
 (function(){var i;for(i=0;i<2;i++){if(T[i].done){startAlarm(i);break;}}})();
 })();
 </script>
-
-<section style="margin:24px 16px">
-  <a class="btn" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg" target="_blank" style="display:block;width:100%;box-sizing:border-box;text-align:center;padding:28px 0;font-size:2.2em;background:#e8772e;color:#fff;border-radius:16px;text-decoration:none">Foodie Recipes</a>
-</section>
 </body>
 </html>
