@@ -71,7 +71,7 @@ button,a.btn{font-family:inherit}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
 /* music */
 #music .btn.pandora{width:100%;background:#102a4c;border-color:#4c8dff;min-height:80px;font-size:3.8vmin}
-#music .btn.station{-webkit-flex:1 1 42%;flex:1 1 42%;background:#121a28;border-color:#3d5a80;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#music .btn.station{-webkit-flex:1 1 42%;flex:1 1 42%;background:#121a28;border-color:#3d5a80;white-space:normal;line-height:1.15;text-align:center;padding:1vmin 1.4vmin}
 #music #stations:not(:empty){margin-top:1vmin}
 /* recipes */
 #home>.card:last-child{margin-bottom:0}
@@ -134,9 +134,9 @@ html,body{height:100%;overflow:hidden}
 #links .btn{min-height:9vmin;font-size:3.4vmin}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
 #music .btn.pandora{min-height:9vmin;font-size:3.4vmin}
-#music.has-stations .btn.pandora{min-height:7.6vmin}
-#music #stations:not(:empty){margin-top:.8vmin}
-#music .btn.station{min-height:7vmin}
+#music.has-stations .btn.pandora{min-height:7vmin;font-size:3vmin}
+#music #stations:not(:empty){margin-top:.6vmin}
+#music .btn.station{min-height:8.2vmin;font-size:2.5vmin}
 #events{font-size:3.2vmin}
 .ev{padding:.6vmin 0}
 .btn.ask{background:#1d9bf0;border-color:#5bb8f5;font-size:4vmin;min-height:9vmin;-webkit-flex:none;flex:none}
@@ -203,16 +203,19 @@ html,body{height:100%;overflow:hidden}
 </div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261106d"></script>
+<script src="pdfjs/pdf.min.js?v=20261106e"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
    { label: "Station name", url: "https://www.pandora.com/" } */
 var PANDORA_STATIONS = [
-  { label: "Thompson Twins Radio", url: "https://pandora.app.link/HAOHo0SbR7b" }
+  { label: "Thompson Twins Radio", url: "https://pandora.app.link/HAOHo0SbR7b" },
+  { label: "90s, 2000s & Today's Hits", url: "https://pandora.app.link/AbaBEHIfR7b" },
+  { label: "Sailing Radio", url: "https://pandora.app.link/gCES1f7fR7b" },
+  { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261106d";
+var KITCHEN_BUILD = "20261106e";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
