@@ -74,14 +74,20 @@ button,a.btn{font-family:inherit}
 #home>.card:last-child{margin-bottom:0}
 #recipes{display:none}
 .recipe-bar{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap}
-.recipe-bar .label{-webkit-flex:1 1 auto;flex:1 1 auto;margin:0 1vmin .6vmin 0}
-.recipe-bar .btn{-webkit-flex:0 0 auto;flex:0 0 auto;min-height:7vmin;margin:0 .6vmin .6vmin 0;padding:0 2vmin;font-size:2.8vmin}
+.recipe-bar .label{-webkit-flex:1 1 auto;flex:1 1 auto;margin:0 1vmin .6vmin 0;font-size:3.2vmin;color:#fff}
+.recipe-bar .btn{-webkit-flex:0 0 auto;flex:0 0 auto;min-height:9vmin;margin:0 .6vmin .6vmin 0;padding:0 2.2vmin;font-size:3vmin}
 #recipe-back[hidden]{display:none}
 #recipe-drive{background:#3a2416;border-color:#ffa060}
-.recipe-list{overflow:auto;-webkit-overflow-scrolling:touch;max-height:30vmin;margin-top:.4vmin}
-.recipe-list .btn{width:100%;min-height:7vmin;height:auto;margin:0 0 .8vmin;padding:1vmin 2vmin;font-size:2.8vmin;font-weight:700;background:#222;border-color:#444;white-space:normal;line-height:1.2}
-.recipe-list .btn.on{background:#3a2416;border-color:#ffa060}
-#recipe-frame{-webkit-flex:1 1 auto;flex:1 1 auto;width:100%;min-height:34vmin;margin-top:1vmin;border:0;border-radius:1.4vmin;background:#111}
+.recipe-list{overflow:auto;-webkit-overflow-scrolling:touch;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:0;margin-top:.6vmin}
+.recipe-list .btn{width:auto;height:auto;font-weight:700;white-space:normal;line-height:1.15;text-align:center}
+#recipes.show-cats .recipe-list,#recipes.show-list .recipe-list{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-content:stretch;align-content:stretch}
+#recipes.show-cats .recipe-list .btn{-webkit-flex:1 1 42%;flex:1 1 42%;min-height:22vmin;margin:.7vmin;padding:1.4vmin;font-size:3.8vmin;background:#2a2118;border-color:#e8772e}
+#recipes.show-list .recipe-list{-webkit-align-content:flex-start;align-content:flex-start}
+#recipes.show-list .recipe-list .btn{-webkit-flex:1 1 100%;flex:1 1 100%;min-height:12vmin;margin:.55vmin 0;padding:1.2vmin 2vmin;font-size:3.3vmin;background:#222;border-color:#555}
+#recipe-frame{display:none;width:100%;min-height:0;margin-top:1vmin;border:0;border-radius:1.4vmin;background:#111}
+#recipes.show-file .recipe-list{display:none}
+#recipes.show-file #recipe-frame{display:block;-webkit-flex:1 1 auto;flex:1 1 auto}
+#recipe-frame[hidden]{display:none}
 body.recipes-open #home{display:none}
 body.recipes-open #recipes{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:0;height:100%;margin-bottom:0;overflow:hidden}
 /* alarm overlay */
@@ -128,16 +134,13 @@ html,body{height:100%;overflow:hidden}
 #events{font-size:3.2vmin}
 .ev{padding:.6vmin 0}
 .btn.ask{background:#1d9bf0;border-color:#5bb8f5;font-size:4vmin;min-height:9vmin;-webkit-flex:none;flex:none}
-.recipe-bar .btn{min-height:7vmin;font-size:2.6vmin}
-.recipe-list{max-height:26vmin}
-.recipe-list .btn{min-height:6.4vmin;font-size:2.5vmin}
 @media (orientation:portrait){
   html,body{overflow:auto}
   #time{font-size:18vmin}.tdisp{font-size:12vmin}
   .col+.col{margin-left:0;margin-top:1.5vmin}
   body.recipes-open #recipes{height:auto;overflow:visible}
-  .recipe-list{max-height:34vmin}
-  #recipe-frame{-webkit-flex:none;flex:none;height:62vmin;min-height:62vmin}
+  #recipes.show-cats .recipe-list .btn{min-height:20vmin}
+  #recipes.show-file #recipe-frame{-webkit-flex:none;flex:none;height:62vmin;min-height:62vmin}
 }
 </style>
 </head>
@@ -168,13 +171,13 @@ html,body{height:100%;overflow:hidden}
    </div>
     <div class="card" id="recipes">
       <div class="recipe-bar">
-        <div class="label">Recipes</div>
+        <div class="label" id="recipe-title">Recipes</div>
         <button type="button" class="btn" id="recipe-back" hidden>Back</button>
         <button type="button" class="btn" id="recipe-close">Close</button>
         <a class="btn" id="recipe-drive" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg">Open in Drive</a>
       </div>
       <div class="recipe-list" id="recipe-list"></div>
-      <iframe id="recipe-frame" title="Recipe"></iframe>
+      <iframe id="recipe-frame" title="Recipe" hidden></iframe>
     </div>
   </div>
   <div class="col">
@@ -200,20 +203,73 @@ html,body{height:100%;overflow:hidden}
 var PANDORA_STATIONS = [
   { label: "Thompson Twins Radio", url: "https://pandora.app.link/HAOHo0SbR7b" }
 ];
-/* Foodie folder from the Drive link. The embedded grid opens a file in a new tab,
-   and this page cannot intercept that click, so RECIPES loads each file in the viewer. */
-var FOODIE_FOLDER_ID = "0B9HMBn2wtvIJMWN3MWczb1dha0k";
+/* Foodie recipes by category. Each entry is [name, Drive file id].
+   Card Photos is omitted. Open in Drive still goes to the shared folder. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
-var RECIPES = [
-  { name: "Green Chili Stew", id: "14Ce40XEswyClcU9b7RQDXHIRu4JZoGAL" },
-  { name: "Grilled Tequila-Lime Shrimp", id: "1ExRBogzF596mSpoQGZKyc5ypVSzQqOy_" },
-  { name: "Kofta Burgers with Cucumber and Cumin Yogurt Relish", id: "15lkJ6-jqTnVVB7JojP38Uri5lBa7gdC8" },
-  { name: "Crispy Portobello Cutlets", id: "1spPnayYFY-zkF0_vZHlzLLQLEH69UiMb" },
-  { name: "Basic Pizza Dough", id: "1INVFHroudp4EzsjsK4r7XZP2bz47JNrm" },
-  { name: "Chicken Fried Steak", id: "1jHo_6G4juNkeX1Aib3xwvVOyz4HqiM8R" },
-  { name: "Beer and Brown Sugar Steak Marinade", id: "1mUf5qWpU4ratlFo9w5HmLhV1mqmheIRu" },
-  { name: "Instant Pot Baked Potatoes", id: "1SLxWK__QGPwERFxCkQo5_PNkuj6ZPAGfwF-1G0K5hgg", doc: true }
-];
+var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
+var RECIPES = {
+  "Mains": [
+    ["Al Pastor Tacos with Roasted Tomatillo Avocado Salsa", "1-GVlWPCv99CT0izH9LBslqzPsQX_tHdi"],
+    ["Balsamic and Honey Chicken Skewers", "1pw_xwp0vxHX1vtNtmZALVEeuL8HN8idg"],
+    ["Basic Pizza Dough - By Hand Method", "1INVFHroudp4EzsjsK4r7XZP2bz47JNrm"],
+    ["Beer and Brown Sugar Steak Marinade", "1mUf5qWpU4ratlFo9w5HmLhV1mqmheIRu"],
+    ["Chicken Fried Steak", "1jHo_6G4juNkeX1Aib3xwvVOyz4HqiM8R"],
+    ["Crispy Portobello Cutlets", "1spPnayYFY-zkF0_vZHlzLLQLEH69UiMb"],
+    ["Firecracker Pineapple Chicken", "19hVDGVKyF1RAd5qStqoYJveA_UMYDIEG"],
+    ["Grilled Carne Asada Tacos with Street Corn", "1WAAh4zxBBEbss6PEu1v_q_GOmRpMb4j2"],
+    ["Grilled Rib Eyes", "1Eq-Q0fLzXcUR5YpsqtN95QRBe3UE27Uv"],
+    ["Grilled Tequila-Lime Shrimp", "1ExRBogzF596mSpoQGZKyc5ypVSzQqOy_"],
+    ["Half-and-Half Veggie Sausage Breakfast Casserole", "1vrcqmeUGC-Rt0Cc430zkbVeiKqJPFvCk"],
+    ["Honey-Dijon Pork Chops", "1DoKzZY0SFu9rZpu3zWXVI1jfq2yU9aq0"],
+    ["Kofta Burgers", "15lkJ6-jqTnVVB7JojP38Uri5lBa7gdC8"],
+    ["Korean Barbecue Beef", "1St-ucyGD3vobQDTrzt6bXUiKa8wwD5ji"],
+    ["Marinated Flank Steak", "1R6y4kzTYCHahwVIkcaGCyaCDVq9cM7EK"],
+    ["Mediterranean Lemon Chicken Bowl", "1L_DSX837sWIeQIecGC1_N0wsTMAONAIr"],
+    ["Pizza Dough", "1L0vx3VRpKIIbq1TI5gkpO6zbuosAMwu8"],
+    ["Pork & Onion Stir-Fry", "1b587LhsbAV-B0-G6_0FqvWQLzQzBQzvi"],
+    ["Roasted Red Pepper, Mozzarella and Basil Stuffed Chicken", "17ok1OnqkV8qBPUXc7iU82PQZzmYl-jgu"],
+    ["Seared Hanger Steak with Merlot-Mustard Pan Sauce", "1hvaLzTV3LLS1D6TPK4Ipa7DbJzxEqoSH"],
+    ["Slow Cooked Salisbury Steak", "1zEu0orHqeUWPWc7bCeTEeWAiHNQ1l19F"],
+    ["Slow-Cooker Pot Roast", "1MEL6qkWEs-1tEOsWXWNzRaSSlFfJUZiq"],
+    ["Steak Sushi", "1Bf5oMdJBmoPFNkFaDEAitOMylsbzINaE"],
+    ["Teriyaki Marinated Chicken", "1Z_x7FgRYv1Ap9QJNq5CP_DrMwo8ecSV0"],
+    ["Thai Chicken Salad", "1gYlrxjqgPonp37sc5DXtjLKjUc6k-1Uo"]
+  ],
+  "Soups & Chili": [
+    ["Green Chili Stew", "14Ce40XEswyClcU9b7RQDXHIRu4JZoGAL"],
+    ["Mama Sue's Taco Soup", "1Xk0E5kyIFqv9JKR-5_U8xIwP0GMGU0EC"],
+    ["Simple Taco Soup (2013)", "11fE6u-fFDNkyGtkZC6LlsnrTtxrfw_gv"],
+    ["Taco Soup", "1_-q4gukQcFPsYWKsXRUZv184rUwxA4gJ"]
+  ],
+  "Sides": [
+    ["Bacon Jam Roasted Potatoes", "1GujjSSktGbIHfDXutfwpAgAHEysbzLAY"],
+    ["Balsamic Glazed Carrots", "1tVbMiXdCuQHtdRzCxPLE4wcjFPKH8yRf"],
+    ["Garlic Mashed Potatoes", "15zIMfxYBsuxvPhd8KLtkstvm6sTan1M9"],
+    ["Grilled Caesar", "1v4Fqo9q6-NOtMBZogvvQ6xuq7rsxa1-X"],
+    ["Grilled Charred Broccolini", "15zQFY-3Zjpi2ikmI9EHs-vx94RMOf1-v"],
+    ["Grilled Corn Salad", "1_kYCXQ1OPYRVakrSSf0qrB1KiNg7BQDr"],
+    ["Healthiest Greek Salad", "1mqC7Y-KMfvjdY5PiJH57OXZsMNCv1pbo"],
+    ["Instant Pot Baked Potatoes", "1kefVXusicuB66Fgz92JLry0-mTsoATiE"],
+    ["Luby's Spaghetti Salad", "10FpOIF2Wh_wwrAvPyezbCwvYUlIbkGAA"]
+  ],
+  "Apps & Snacks": [
+    ["Buffalo Grilled Shrimp with Goat Cheese Dipping Sauce", "1abdB9GqDbm3NWDt43hkxoF0wBRMw81aB"],
+    ["Dana's Cream Cheese Dip", "1OlApNqTTnMFma1zmjMr5_IYgiNtFRMBG"]
+  ],
+  "Sauces & Dressings": [
+    ["Asian Ginger Grill Marinade", "1_DIIydJDfwhw3mDEAsp0hCDzIqQt4pbk"],
+    ["Best Burger Sauce", "1QYbxeSkrO-Z3sMEEmzz85ulZh0O7X5TY"],
+    ["Garlic Butter", "1fngcBwRK935jBWuUVISOGY5BXL-mzM-q"],
+    ["Herb-Infused Compound Butter", "1e2EjaRfY6xhIK5QHuJnB1WPXGzUEOGRS"],
+    ["White Balsamic and Honey-Dijon Vinaigrette", "19X6p37ClyIJOT5ntCJME3NskqGpsYWPm"]
+  ],
+  "Desserts": [
+    ["Chocolate Gooey Butter Cookies", "1sj3p2GF6JU-l13a74A5bT0XfarTCffnw"],
+    ["Dr Pepper Cake", "1BkfPF28M6K3zQfBxCwZ2Z24OUJntjGw7"],
+    ["Oreo Balls", "1tFs7_XvixRPvo2JVQNjpCtYRNECPztbL"]
+  ]
+};
+
 (function(){
 "use strict";
 var TZ="America/Chicago";
@@ -452,53 +508,94 @@ $("timers").addEventListener("click",function(e){
 },false);
 
 /* ---------- Recipes ---------- */
-function recipePreviewUrl(r){
-  var id=encodeURIComponent(r.id);
-  if(r.doc)return "https://docs.google.com/document/d/"+id+"/preview";
-  return "https://drive.google.com/file/d/"+id+"/preview";
-}
-function folderEmbedUrl(){
-  if(!FOODIE_FOLDER_ID)return "";
-  return "https://drive.google.com/embeddedfolderview?id="+encodeURIComponent(FOODIE_FOLDER_ID)+"#grid";
-}
-function recipeList(){
-  return Object.prototype.toString.call(RECIPES)==="[object Array]"?RECIPES:[];
-}
-function renderRecipeList(){
-  var box=$("recipe-list"),list,i,r,h;
-  if(!box)return;
-  list=recipeList();
-  h="";
-  for(i=0;i<list.length;i++){
-    r=list[i];
-    if(!r||r.name==null||r.id==null||!String(r.name)||!String(r.id))continue;
-    h+='<button type="button" class="btn" data-i="'+i+'">'+esc(r.name)+'</button>';
+var recipeMode="cats", recipeCat="", recipeItems=[];
+function recipeCats(){
+  var out=[],i,name,rows;
+  if(!RECIPE_ORDER||!RECIPES)return out;
+  for(i=0;i<RECIPE_ORDER.length;i++){
+    name=RECIPE_ORDER[i];
+    if(name==="Card Photos")continue;
+    rows=RECIPES[name];
+    if(rows&&rows.length)out.push(name);
   }
+  return out;
+}
+function recipesIn(name){
+  var rows=(RECIPES&&RECIPES[name])||[],copy=[],i,an,bn;
+  for(i=0;i<rows.length;i++){
+    if(rows[i]&&rows[i][0]&&rows[i][1])copy.push(rows[i]);
+  }
+  copy.sort(function(a,b){
+    an=String(a[0]).toLowerCase();bn=String(b[0]).toLowerCase();
+    return an<bn?-1:an>bn?1:0;
+  });
+  return copy;
+}
+function setRecipeMode(mode){
+  var card=$("recipes");
+  recipeMode=mode;
+  if(!card)return;
+  card.className="card "+(mode==="file"?"show-file":mode==="list"?"show-list":"show-cats");
+}
+function setRecipeTitle(text){
+  var el=$("recipe-title");
+  if(el)el.firstChild?el.firstChild.nodeValue=text:el.appendChild(document.createTextNode(text));
+}
+function setRecipeDrive(url){
+  var el=$("recipe-drive");
+  if(el)el.href=url||FOODIE_DRIVE_URL;
+}
+function hideRecipeFrame(){
+  var frame=$("recipe-frame");
+  if(!frame)return;
+  frame.hidden=true;
+  frame.removeAttribute("src");
+  frame.title="Recipe";
+}
+function showCategories(){
+  var box=$("recipe-list"),cats,i,h,back=$("recipe-back");
+  recipeCat="";recipeItems=[];
+  setRecipeMode("cats");
+  setRecipeTitle("Recipes");
+  setRecipeDrive(FOODIE_DRIVE_URL);
+  if(back)back.hidden=true;
+  hideRecipeFrame();
+  if(!box)return;
+  cats=recipeCats();
+  h="";
+  for(i=0;i<cats.length;i++)h+='<button type="button" class="btn" data-cat="'+i+'">'+esc(cats[i])+'</button>';
   box.innerHTML=h;
 }
-function markRecipe(i){
-  var box=$("recipe-list"),buttons,n,on;
+function showCategory(name){
+  var box=$("recipe-list"),items,i,h,back=$("recipe-back");
+  recipeCat=name;
+  recipeItems=recipesIn(name);
+  setRecipeMode("list");
+  setRecipeTitle(name);
+  setRecipeDrive(FOODIE_DRIVE_URL);
+  if(back)back.hidden=false;
+  hideRecipeFrame();
   if(!box)return;
-  buttons=box.getElementsByTagName("button");
-  for(n=0;n<buttons.length;n++){
-    on=parseInt(buttons[n].getAttribute("data-i"),10)===i;
-    buttons[n].className=on?"btn on":"btn";
-  }
-}
-function showFolder(){
-  var frame=$("recipe-frame"),back=$("recipe-back"),url=folderEmbedUrl();
-  if(frame)frame.src=url||"about:blank";
-  if(back)back.hidden=true;
-  markRecipe(-1);
+  items=recipeItems;h="";
+  for(i=0;i<items.length;i++)h+='<button type="button" class="btn" data-i="'+i+'">'+esc(items[i][0])+'</button>';
+  box.innerHTML=h;
+  box.scrollTop=0;
 }
 function showRecipe(i){
-  var list=recipeList(),r,frame=$("recipe-frame"),back=$("recipe-back");
-  r=list[i];
-  if(!r||!frame)return;
-  frame.src=recipePreviewUrl(r);
-  frame.title=String(r.name);
+  var item=recipeItems[i],frame=$("recipe-frame"),back=$("recipe-back"),id;
+  if(!item||!frame)return;
+  id=encodeURIComponent(item[1]);
+  setRecipeMode("file");
+  setRecipeTitle(String(item[0]));
+  setRecipeDrive("https://drive.google.com/file/d/"+id+"/view");
   if(back)back.hidden=false;
-  markRecipe(i);
+  frame.hidden=false;
+  frame.title=String(item[0]);
+  frame.src="https://drive.google.com/file/d/"+id+"/preview";
+}
+function recipeBack(){
+  if(recipeMode==="file")showCategory(recipeCat);
+  else showCategories();
 }
 function setRecipesOpen(on){
   var c=document.body.className.replace(/\brecipes-open\b/g,"").replace(/^\s+|\s+$/g,"").replace(/\s{2,}/g," ");
@@ -506,21 +603,25 @@ function setRecipesOpen(on){
 }
 function openRecipes(){
   setRecipesOpen(true);
-  showFolder();
+  showCategories();
 }
 function closeRecipes(){
   setRecipesOpen(false);
+  hideRecipeFrame();
+  showCategories();
 }
 if($("recipe-drive")&&FOODIE_DRIVE_URL)$("recipe-drive").href=FOODIE_DRIVE_URL;
-renderRecipeList();
 if($("open-recipes"))$("open-recipes").addEventListener("click",openRecipes,false);
 if($("recipe-close"))$("recipe-close").addEventListener("click",closeRecipes,false);
-if($("recipe-back"))$("recipe-back").addEventListener("click",showFolder,false);
+if($("recipe-back"))$("recipe-back").addEventListener("click",recipeBack,false);
 if($("recipe-list"))$("recipe-list").addEventListener("click",function(e){
-  var n=e.target;
-  while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-i")))n=n.parentNode;
+  var n=e.target,cats;
+  while(n&&n!==this&&!(n.getAttribute&&(n.getAttribute("data-cat")||n.getAttribute("data-i"))))n=n.parentNode;
   if(!n||n===this)return;
-  showRecipe(parseInt(n.getAttribute("data-i"),10));
+  if(n.getAttribute("data-cat")!=null){
+    cats=recipeCats();
+    showCategory(cats[parseInt(n.getAttribute("data-cat"),10)]);
+  }else showRecipe(parseInt(n.getAttribute("data-i"),10));
 },false);
 
 /* ---------- Boot ---------- */
