@@ -64,9 +64,8 @@ button,a.btn{font-family:inherit}
 .evl{display:block;font-size:2.8vmin;color:#999;font-weight:400}
 .none{color:#aaa;font-size:3.8vmin}
 /* links */
-#links .btn{-webkit-flex:1 1 28%;flex:1 1 28%;min-height:80px;font-size:3.8vmin;padding:0 1vmin;background:#222;border-color:#555}
-#links .btn.any{background:#0d4b2a;border-color:#2ecc71}
-#links .btn.yt{background:#4a1111;border-color:#ff4a4a}
+#links .btn{width:100%;min-height:80px;font-size:3.8vmin;background:#222;border-color:#555}
+#links .btn.foodie{background:#e8772e;border-color:#ffa060}
 /* music */
 #music .btn.pandora{width:100%;background:#102a4c;border-color:#4c8dff;min-height:80px;font-size:3.8vmin}
 #music .btn.station{-webkit-flex:1 1 42%;flex:1 1 42%;background:#121a28;border-color:#3d5a80;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -106,7 +105,7 @@ html,body{height:100%;overflow:hidden}
 .tdisp{font-size:8vmin;margin:.2vmin 0 .6vmin}
 .btn{min-height:7vmin;font-size:3vmin}
 .btn.rst{font-size:2.8vmin}
-#links .btn{min-height:7vmin;font-size:2.9vmin}
+#links .btn{min-height:9vmin;font-size:3.4vmin}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
 #music .btn.pandora{min-height:9vmin;font-size:3.4vmin}
 #music.has-stations .btn.pandora{min-height:7.6vmin}
@@ -138,14 +137,7 @@ html,body{height:100%;overflow:hidden}
     </div>
 <div class="card" id="links">
       <div class="label">Go to</div>
-      <div class="row">
-        <a class="btn any" target="_blank" rel="noopener" href="https://www.anylist.com/web">AnyList</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.allrecipes.com/">AllRecipes</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.foodnetwork.com/">Food Network</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.heb.com/recipes">HEB Recipes</a>
-        <a class="btn yt" href="youtube://" onclick="var t=setTimeout(function(){location.href='https://www.youtube.com/'},1500);window.addEventListener('pagehide',function(){clearTimeout(t)});document.addEventListener('visibilitychange',function(){if(document.hidden)clearTimeout(t)});">YouTube</a>
-        <a class="btn foodie" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg">Foodie Recipes</a>
-      </div>
+      <a class="btn foodie" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg">Foodie Recipes</a>
     </div>
     <div class="card" id="music">
       <div class="label">Music</div>
