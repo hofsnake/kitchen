@@ -64,13 +64,26 @@ button,a.btn{font-family:inherit}
 .evl{display:block;font-size:2.8vmin;color:#999;font-weight:400}
 .none{color:#aaa;font-size:3.8vmin}
 /* links */
-#links .btn{-webkit-flex:1 1 28%;flex:1 1 28%;min-height:80px;font-size:3.8vmin;padding:0 1vmin;background:#222;border-color:#555}
-#links .btn.any{background:#0d4b2a;border-color:#2ecc71}
-#links .btn.yt{background:#4a1111;border-color:#ff4a4a}
+#links .btn{width:100%;min-height:80px;font-size:3.8vmin;background:#222;border-color:#555}
+#links .btn.foodie{background:#e8772e;border-color:#ffa060}
 /* music */
 #music .btn.pandora{width:100%;background:#102a4c;border-color:#4c8dff;min-height:80px;font-size:3.8vmin}
 #music .btn.station{-webkit-flex:1 1 42%;flex:1 1 42%;background:#121a28;border-color:#3d5a80;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #music #stations:not(:empty){margin-top:1vmin}
+/* recipes */
+#home>.card:last-child{margin-bottom:0}
+#recipes{display:none}
+.recipe-bar{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+.recipe-bar .label{-webkit-flex:1 1 auto;flex:1 1 auto;margin:0 1vmin .6vmin 0}
+.recipe-bar .btn{-webkit-flex:0 0 auto;flex:0 0 auto;min-height:7vmin;margin:0 .6vmin .6vmin 0;padding:0 2vmin;font-size:2.8vmin}
+#recipe-back[hidden]{display:none}
+#recipe-drive{background:#3a2416;border-color:#ffa060}
+.recipe-list{overflow:auto;-webkit-overflow-scrolling:touch;max-height:30vmin;margin-top:.4vmin}
+.recipe-list .btn{width:100%;min-height:7vmin;height:auto;margin:0 0 .8vmin;padding:1vmin 2vmin;font-size:2.8vmin;font-weight:700;background:#222;border-color:#444;white-space:normal;line-height:1.2}
+.recipe-list .btn.on{background:#3a2416;border-color:#ffa060}
+#recipe-frame{-webkit-flex:1 1 auto;flex:1 1 auto;width:100%;min-height:34vmin;margin-top:1vmin;border:0;border-radius:1.4vmin;background:#111}
+body.recipes-open #home{display:none}
+body.recipes-open #recipes{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:0;height:100%;margin-bottom:0;overflow:hidden}
 /* alarm overlay */
 #alarm{display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:9;background:#ff3b30;color:#fff;
   -webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
@@ -106,7 +119,7 @@ html,body{height:100%;overflow:hidden}
 .tdisp{font-size:8vmin;margin:.2vmin 0 .6vmin}
 .btn{min-height:7vmin;font-size:3vmin}
 .btn.rst{font-size:2.8vmin}
-#links .btn{min-height:7vmin;font-size:2.9vmin}
+#links .btn{min-height:9vmin;font-size:3.4vmin}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
 #music .btn.pandora{min-height:9vmin;font-size:3.4vmin}
 #music.has-stations .btn.pandora{min-height:7.6vmin}
@@ -115,17 +128,24 @@ html,body{height:100%;overflow:hidden}
 #events{font-size:3.2vmin}
 .ev{padding:.6vmin 0}
 .btn.ask{background:#1d9bf0;border-color:#5bb8f5;font-size:4vmin;min-height:9vmin;-webkit-flex:none;flex:none}
+.recipe-bar .btn{min-height:7vmin;font-size:2.6vmin}
+.recipe-list{max-height:26vmin}
+.recipe-list .btn{min-height:6.4vmin;font-size:2.5vmin}
 @media (orientation:portrait){
   html,body{overflow:auto}
   #time{font-size:18vmin}.tdisp{font-size:12vmin}
   .col+.col{margin-left:0;margin-top:1.5vmin}
+  body.recipes-open #recipes{height:auto;overflow:visible}
+  .recipe-list{max-height:34vmin}
+  #recipe-frame{-webkit-flex:none;flex:none;height:62vmin;min-height:62vmin}
 }
 </style>
 </head>
 <body>
 <div id="app">
  <div id="main">
-  <div class="col">
+  <div class="col" id="home-col">
+   <div id="home">
     <div class="card">
       <div id="time">--:--<span id="ampm"></span></div>
       <div id="date">&nbsp;</div>
@@ -138,19 +158,23 @@ html,body{height:100%;overflow:hidden}
     </div>
 <div class="card" id="links">
       <div class="label">Go to</div>
-      <div class="row">
-        <a class="btn any" target="_blank" rel="noopener" href="https://www.anylist.com/web">AnyList</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.allrecipes.com/">AllRecipes</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.foodnetwork.com/">Food Network</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.heb.com/recipes">HEB Recipes</a>
-        <a class="btn yt" href="youtube://" onclick="var t=setTimeout(function(){location.href='https://www.youtube.com/'},1500);window.addEventListener('pagehide',function(){clearTimeout(t)});document.addEventListener('visibilitychange',function(){if(document.hidden)clearTimeout(t)});">YouTube</a>
-        <a class="btn foodie" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg">Foodie Recipes</a>
-      </div>
+      <button type="button" class="btn foodie" id="open-recipes">Foodie Recipes</button>
     </div>
     <div class="card" id="music">
       <div class="label">Music</div>
       <a class="btn pandora" target="_blank" rel="noopener" href="https://www.pandora.com/">Open Pandora</a>
       <div id="stations"></div>
+    </div>
+   </div>
+    <div class="card" id="recipes">
+      <div class="recipe-bar">
+        <div class="label">Recipes</div>
+        <button type="button" class="btn" id="recipe-back" hidden>Back</button>
+        <button type="button" class="btn" id="recipe-close">Close</button>
+        <a class="btn" id="recipe-drive" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg">Open in Drive</a>
+      </div>
+      <div class="recipe-list" id="recipe-list"></div>
+      <iframe id="recipe-frame" title="Recipe"></iframe>
     </div>
   </div>
   <div class="col">
@@ -174,7 +198,21 @@ html,body{height:100%;overflow:hidden}
    About two stations fit on one row of the iPad screen. Example:
    { label: "Station name", url: "https://www.pandora.com/" } */
 var PANDORA_STATIONS = [
-  { label: "Thompson Twins Radio", url: "https://www.pandora.com/search/Thompson%20Twins/all" }
+  { label: "Thompson Twins Radio", url: "https://pandora.app.link/HAOHo0SbR7b" }
+];
+/* Foodie folder from the Drive link. The embedded grid opens a file in a new tab,
+   and this page cannot intercept that click, so RECIPES loads each file in the viewer. */
+var FOODIE_FOLDER_ID = "0B9HMBn2wtvIJMWN3MWczb1dha0k";
+var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
+var RECIPES = [
+  { name: "Green Chili Stew", id: "14Ce40XEswyClcU9b7RQDXHIRu4JZoGAL" },
+  { name: "Grilled Tequila-Lime Shrimp", id: "1ExRBogzF596mSpoQGZKyc5ypVSzQqOy_" },
+  { name: "Kofta Burgers with Cucumber and Cumin Yogurt Relish", id: "15lkJ6-jqTnVVB7JojP38Uri5lBa7gdC8" },
+  { name: "Crispy Portobello Cutlets", id: "1spPnayYFY-zkF0_vZHlzLLQLEH69UiMb" },
+  { name: "Basic Pizza Dough", id: "1INVFHroudp4EzsjsK4r7XZP2bz47JNrm" },
+  { name: "Chicken Fried Steak", id: "1jHo_6G4juNkeX1Aib3xwvVOyz4HqiM8R" },
+  { name: "Beer and Brown Sugar Steak Marinade", id: "1mUf5qWpU4ratlFo9w5HmLhV1mqmheIRu" },
+  { name: "Instant Pot Baked Potatoes", id: "1SLxWK__QGPwERFxCkQo5_PNkuj6ZPAGfwF-1G0K5hgg", doc: true }
 ];
 (function(){
 "use strict";
@@ -411,6 +449,78 @@ $("timers").addEventListener("click",function(e){
   while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-a")))n=n.parentNode;
   if(!n||n===this)return;
   act(n.getAttribute("data-a"),parseInt(n.getAttribute("data-i"),10),parseInt(n.getAttribute("data-m")||"0",10));
+},false);
+
+/* ---------- Recipes ---------- */
+function recipePreviewUrl(r){
+  var id=encodeURIComponent(r.id);
+  if(r.doc)return "https://docs.google.com/document/d/"+id+"/preview";
+  return "https://drive.google.com/file/d/"+id+"/preview";
+}
+function folderEmbedUrl(){
+  if(!FOODIE_FOLDER_ID)return "";
+  return "https://drive.google.com/embeddedfolderview?id="+encodeURIComponent(FOODIE_FOLDER_ID)+"#grid";
+}
+function recipeList(){
+  return Object.prototype.toString.call(RECIPES)==="[object Array]"?RECIPES:[];
+}
+function renderRecipeList(){
+  var box=$("recipe-list"),list,i,r,h;
+  if(!box)return;
+  list=recipeList();
+  h="";
+  for(i=0;i<list.length;i++){
+    r=list[i];
+    if(!r||r.name==null||r.id==null||!String(r.name)||!String(r.id))continue;
+    h+='<button type="button" class="btn" data-i="'+i+'">'+esc(r.name)+'</button>';
+  }
+  box.innerHTML=h;
+}
+function markRecipe(i){
+  var box=$("recipe-list"),buttons,n,on;
+  if(!box)return;
+  buttons=box.getElementsByTagName("button");
+  for(n=0;n<buttons.length;n++){
+    on=parseInt(buttons[n].getAttribute("data-i"),10)===i;
+    buttons[n].className=on?"btn on":"btn";
+  }
+}
+function showFolder(){
+  var frame=$("recipe-frame"),back=$("recipe-back"),url=folderEmbedUrl();
+  if(frame)frame.src=url||"about:blank";
+  if(back)back.hidden=true;
+  markRecipe(-1);
+}
+function showRecipe(i){
+  var list=recipeList(),r,frame=$("recipe-frame"),back=$("recipe-back");
+  r=list[i];
+  if(!r||!frame)return;
+  frame.src=recipePreviewUrl(r);
+  frame.title=String(r.name);
+  if(back)back.hidden=false;
+  markRecipe(i);
+}
+function setRecipesOpen(on){
+  var c=document.body.className.replace(/\brecipes-open\b/g,"").replace(/^\s+|\s+$/g,"").replace(/\s{2,}/g," ");
+  document.body.className=on?(c?c+" ":"")+"recipes-open":c;
+}
+function openRecipes(){
+  setRecipesOpen(true);
+  showFolder();
+}
+function closeRecipes(){
+  setRecipesOpen(false);
+}
+if($("recipe-drive")&&FOODIE_DRIVE_URL)$("recipe-drive").href=FOODIE_DRIVE_URL;
+renderRecipeList();
+if($("open-recipes"))$("open-recipes").addEventListener("click",openRecipes,false);
+if($("recipe-close"))$("recipe-close").addEventListener("click",closeRecipes,false);
+if($("recipe-back"))$("recipe-back").addEventListener("click",showFolder,false);
+if($("recipe-list"))$("recipe-list").addEventListener("click",function(e){
+  var n=e.target;
+  while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-i")))n=n.parentNode;
+  if(!n||n===this)return;
+  showRecipe(parseInt(n.getAttribute("data-i"),10));
 },false);
 
 /* ---------- Boot ---------- */
