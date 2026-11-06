@@ -67,6 +67,10 @@ button,a.btn{font-family:inherit}
 #links .btn{-webkit-flex:1 1 28%;flex:1 1 28%;min-height:80px;font-size:3.8vmin;padding:0 1vmin;background:#222;border-color:#555}
 #links .btn.any{background:#0d4b2a;border-color:#2ecc71}
 #links .btn.yt{background:#4a1111;border-color:#ff4a4a}
+/* music */
+#music .btn.pandora{width:100%;background:#102a4c;border-color:#4c8dff;min-height:80px;font-size:3.8vmin}
+#music .btn.station{-webkit-flex:1 1 42%;flex:1 1 42%;background:#121a28;border-color:#3d5a80;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#music #stations:not(:empty){margin-top:1vmin}
 /* alarm overlay */
 #alarm{display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:9;background:#ff3b30;color:#fff;
   -webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
@@ -104,6 +108,10 @@ html,body{height:100%;overflow:hidden}
 .btn.rst{font-size:2.8vmin}
 #links .btn{min-height:7vmin;font-size:2.9vmin}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
+#music .btn.pandora{min-height:9vmin;font-size:3.4vmin}
+#music.has-stations .btn.pandora{min-height:7.6vmin}
+#music #stations:not(:empty){margin-top:.8vmin}
+#music .btn.station{min-height:7vmin}
 #events{font-size:3.2vmin}
 .ev{padding:.6vmin 0}
 .btn.ask{background:#1d9bf0;border-color:#5bb8f5;font-size:4vmin;min-height:9vmin;-webkit-flex:none;flex:none}
@@ -139,6 +147,11 @@ html,body{height:100%;overflow:hidden}
         <a class="btn foodie" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg">Foodie Recipes</a>
       </div>
     </div>
+    <div class="card" id="music">
+      <div class="label">Music</div>
+      <a class="btn pandora" target="_blank" rel="noopener" href="https://www.pandora.com/">Open Pandora</a>
+      <div id="stations"></div>
+    </div>
   </div>
   <div class="col">
     <div class="card" style="padding:2vmin">
@@ -157,6 +170,12 @@ html,body{height:100%;overflow:hidden}
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
 <script>
+/* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
+   About two stations fit on one row of the iPad screen. Example:
+   { label: "Station name", url: "https://www.pandora.com/" } */
+var PANDORA_STATIONS = [
+  { label: "Thompson Twins Radio", url: "https://www.pandora.com/search/Thompson%20Twins/all" }
+];
 (function(){
 "use strict";
 var TZ="America/Chicago";
@@ -253,6 +272,26 @@ function loadEvents(){
     if(err){var c=lsGet("k_ev");renderEvents(c||null);return;}
     lsSet("k_ev",j);renderEvents(j);
   });
+}
+
+/* ---------- Music ---------- */
+function escAttr(s){return esc(s).replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
+function renderStations(){
+  var box=$("stations"),card=$("music"),list,h,i,s,label,url,n;
+  if(!box)return;
+  list=Object.prototype.toString.call(PANDORA_STATIONS)==="[object Array]"?PANDORA_STATIONS:[];
+  h="";n=0;
+  for(i=0;i<list.length;i++){
+    s=list[i];
+    if(!s)continue;
+    label=s.label==null?"":String(s.label).replace(/^\s+|\s+$/g,"");
+    url=s.url==null?"":String(s.url).replace(/^\s+|\s+$/g,"");
+    if(!label||!/^https?:\/\//i.test(url))continue;
+    n++;
+    h+='<a class="btn station" target="_blank" rel="noopener" href="'+escAttr(url)+'">'+esc(label)+'</a>';
+  }
+  box.innerHTML=n?'<div class="row">'+h+"</div>":"";
+  if(card)card.className=n?"card has-stations":"card";
 }
 
 /* ---------- Audio ---------- */
@@ -376,6 +415,7 @@ $("timers").addEventListener("click",function(e){
 
 /* ---------- Boot ---------- */
 buildTimers();
+renderStations();
 if(!$("ampm").firstChild)$("ampm").appendChild(document.createTextNode(""));
 if(!$("wxnote").firstChild)$("wxnote").appendChild(document.createTextNode(""));
 tickClock();
