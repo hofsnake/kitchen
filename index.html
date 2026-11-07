@@ -59,26 +59,31 @@ button,a.btn{font-family:inherit}
 .btn.pause{background:#8a5a00;border-color:#ffb000}
 .btn.rst{-webkit-flex:1.4 1 0;flex:1.4 1 0;padding:0 1vmin;font-size:3.4vmin;background:#3a1d1d;border-color:#7a3030}
 .none{color:#aaa;font-size:3.8vmin}
-/* converter */
-#convert{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:0;overflow:hidden}
-#convert .conv-head{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center}
-#convert .conv-head .label{-webkit-flex:1;flex:1;margin-bottom:0}
-#convert .row{margin-top:.4vmin}
-#convert .btn{-webkit-flex:1 1 0;flex:1 1 0;min-width:0;padding:0 1vmin}
+/* converter: block/table rows, no flex gap, safe on iOS 12 */
+#convert{display:block;position:static;float:none;overflow:visible}
+#convert .conv-head{display:table;position:static;float:none;width:100%;height:4.6vmin;margin:0 0 .4vmin;table-layout:fixed}
+#convert .conv-head .label{display:table-cell;float:none;position:static;width:auto;margin:0;height:4.6vmin;line-height:4.6vmin;font-size:2vmin;vertical-align:middle}
+#convert .conv-head .btn.ask{display:table-cell;float:none;position:static;width:24vmin;height:4.4vmin;min-height:4.4vmin;line-height:4.4vmin;margin:0;padding:0;vertical-align:middle;border-radius:999px;background:#1d9bf0;border-color:#5bb8f5;font-size:2vmin;text-align:center}
+#convert .btn{min-width:0;padding:0 .6vmin;float:none;position:static}
 #convert .btn.on{background:#1d3550;border-color:#7fd6ff}
-.conv-amt{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-top:.8vmin}
-#convert .conv-amt .btn{-webkit-flex:none;flex:none;min-width:8vmin;font-size:4.2vmin;font-weight:800}
-#conv-in{-webkit-flex:1;flex:1;min-width:0;margin:0 1vmin;min-height:7vmin;font-size:4.4vmin;font-weight:700;text-align:center;color:#fff;background:#101820;border:2px solid #3d5a80;border-radius:1.6vmin;-webkit-user-select:text;user-select:text;-webkit-appearance:none;appearance:none}
-.conv-frac{margin-top:.4vmin}
-.conv-line{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-top:.25vmin}
-.conv-k{font-size:1.8vmin;letter-spacing:.06em;text-transform:uppercase;color:#9a9a9a;font-weight:600;-webkit-flex:none;flex:none;width:8vmin;margin:0}
-.conv-line .conv-units{-webkit-flex:1;flex:1;display:-webkit-flex;display:flex}
-.conv-out{font-size:5.2vmin;font-weight:800;line-height:1;color:#7fd6ff;margin-top:.35vmin;font-variant-numeric:tabular-nums}
-.conv-pretty{font-size:2.8vmin;font-weight:700;color:#ffb000;min-height:1.1em}
-#conv-calc,#conv-oven{overflow:auto;-webkit-overflow-scrolling:touch;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:0}
-#conv-result{-webkit-flex:none;flex:none}
-#conv-oven{margin-top:.4vmin}
-#conv-oven .btn{width:100%;-webkit-flex:none;flex:none;margin:0 0 .5vmin;text-align:left;padding:0 1.6vmin}
+#conv-modes,#conv-fracs,.conv-amt,.conv-line,#conv-result,#conv-calc,#conv-oven{display:block;position:static;float:none;clear:both;width:100%;margin:.4vmin 0 0}
+#conv-modes,#conv-fracs{height:6.2vmin;font-size:0;white-space:nowrap}
+#conv-modes .btn,#conv-fracs .btn{display:inline-block;vertical-align:top;float:none;position:static;height:6.2vmin;line-height:6.2vmin;margin:0 1% 0 0;padding:0}
+#conv-modes .btn{width:24%}
+#conv-modes .btn:last-child,#conv-fracs .btn:last-child{margin-right:0}
+#conv-fracs .btn{width:19%}
+.conv-amt{height:8vmin;font-size:0;white-space:nowrap}
+.conv-amt .btn,#conv-in{display:inline-block;vertical-align:top;float:none;position:static;height:8vmin;line-height:8vmin;margin:0;padding:0}
+#conv-minus,#conv-plus{width:8vmin;font-size:4vmin;font-weight:800}
+#conv-in{width:-webkit-calc(100% - 18vmin);width:calc(100% - 18vmin);margin:0 1vmin;font-size:4vmin;font-weight:700;text-align:center;color:#fff;background:#101820;border:2px solid #3d5a80;border-radius:1.6vmin;-webkit-user-select:text;user-select:text;-webkit-appearance:none;appearance:none}
+.conv-line{height:6.2vmin;font-size:0;white-space:nowrap}
+.conv-k{display:inline-block;vertical-align:top;float:none;width:8vmin;height:6.2vmin;line-height:6.2vmin;margin:0;font-size:1.8vmin;letter-spacing:.06em;text-transform:uppercase;color:#9a9a9a;font-weight:600}
+.conv-units{display:inline-block;vertical-align:top;width:88%;height:6.2vmin;font-size:0;white-space:nowrap}
+.conv-units .btn{display:inline-block;vertical-align:top;float:none;position:static;height:6.2vmin;line-height:6.2vmin;margin:0;padding:0}
+.conv-out{font-size:5vmin;font-weight:800;line-height:1.05;color:#7fd6ff;margin:0;font-variant-numeric:tabular-nums}
+.conv-pretty{font-size:2.6vmin;font-weight:700;color:#ffb000;line-height:1.2;min-height:1.2em}
+#conv-calc{height:auto;overflow:visible}
+#conv-oven .btn{display:block;width:100%;float:none;position:static;height:5.4vmin;line-height:5.4vmin;margin:0 0 .5vmin;text-align:left;padding:0 1.6vmin}
 /* links */
 #links .btn{width:100%;min-height:80px;font-size:3.8vmin;background:#222;border-color:#555}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
@@ -150,16 +155,15 @@ html,body{height:100%;overflow:hidden}
 #music.has-stations .btn.pandora{min-height:7vmin;font-size:3vmin}
 #music #stations:not(:empty){margin-top:.6vmin}
 #music .btn.station{min-height:8.2vmin;font-size:2.5vmin}
-#convert .btn{min-height:4.2vmin;font-size:2.15vmin;margin:.25vmin}
-#convert .row{margin-top:.2vmin}
-#convert .conv-amt{margin-top:.35vmin}
-#convert .conv-amt .btn{min-height:6.2vmin;min-width:6.2vmin;font-size:3.4vmin;margin:0}
-#conv-in{min-height:6.2vmin;font-size:3.4vmin}
-.conv-k{margin:.2vmin 0 0}
-.conv-out{font-size:4.4vmin;margin-top:.2vmin}
-.conv-pretty{font-size:2.5vmin;min-height:1em}
-#conv-oven .btn{min-height:4.8vmin;font-size:2.2vmin;margin:0 0 .35vmin}
-#convert .conv-head .btn.ask{background:#1d9bf0;border-color:#5bb8f5;font-size:2.1vmin;min-height:4.2vmin;padding:0 2vmin;border-radius:999px;width:auto;-webkit-flex:none;flex:none}
+#conv-modes,#conv-fracs{height:5vmin}
+#conv-modes .btn,#conv-fracs .btn{height:5vmin;min-height:5vmin;line-height:5vmin;font-size:2vmin}
+.conv-amt{height:6.6vmin}
+.conv-amt .btn,#conv-in{height:6.6vmin;min-height:6.6vmin;line-height:6.6vmin}
+.conv-line{height:5vmin}
+.conv-k,.conv-units,.conv-units .btn{height:5vmin;min-height:5vmin;line-height:5vmin}
+.conv-units .btn{font-size:2vmin}
+.conv-out{font-size:4vmin}
+#convert .conv-head .btn.ask{width:22vmin;height:4.2vmin;min-height:4.2vmin;line-height:4.2vmin;font-size:1.9vmin}
 @media (orientation:portrait){
   html,body{overflow:auto}
   #time{font-size:18vmin}.tdisp{font-size:12vmin}
@@ -217,7 +221,7 @@ html,body{height:100%;overflow:hidden}
         <div class="label">Converter</div>
         <a class="btn ask" href="grokbot://app/v1/agent?id=d9c86fc8-4785-4529-8fc7-cec66682b4ae">Ask Grok Bot</a>
       </div>
-      <div class="row" id="conv-modes">
+      <div id="conv-modes">
         <button type="button" class="btn on" data-mode="vol">Volume</button>
         <button type="button" class="btn" data-mode="wt">Weight</button>
         <button type="button" class="btn" data-mode="temp">Temp</button>
@@ -229,7 +233,7 @@ html,body{height:100%;overflow:hidden}
           <input id="conv-in" type="text" inputmode="decimal" value="1" autocomplete="off">
           <button type="button" class="btn" id="conv-plus" aria-label="Increase">+</button>
         </div>
-        <div class="row conv-frac" id="conv-fracs">
+        <div id="conv-fracs">
           <button type="button" class="btn" data-frac="1/4">1/4</button>
           <button type="button" class="btn" data-frac="1/3">1/3</button>
           <button type="button" class="btn" data-frac="1/2">1/2</button>
@@ -250,7 +254,7 @@ html,body{height:100%;overflow:hidden}
 </div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261106g"></script>
+<script src="pdfjs/pdf.min.js?v=20261106h"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
@@ -262,7 +266,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261106g";
+var KITCHEN_BUILD = "20261106h";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -759,7 +763,7 @@ function paintUnitRow(id, selected){
   if(!el)return;
   for(i=0;i<spec.units.length;i++){
     u=spec.units[i];
-    h+='<button type="button" class="btn'+(u.id===selected?" on":"")+'" data-u="'+u.id+'">'+esc(u.n)+'</button>';
+    h+='<button type="button" class="btn'+(u.id===selected?" on":"")+'" data-u="'+u.id+'" style="width:'+(100/spec.units.length).toFixed(3)+'%">'+esc(u.n)+'</button>';
   }
   el.innerHTML=h;
 }
