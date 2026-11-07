@@ -15,12 +15,6 @@
   ],
   "dated": [
     {
-      "date": "2026-11-06",
-      "time": "7:00 PM",
-      "show": "Merry Memories",
-      "where": "Hallmark, Frndly TV"
-    },
-    {
       "date": "2026-11-10",
       "time": "7:00 PM",
       "show": "RHONY",
@@ -57,18 +51,6 @@
       "where": "Hulu"
     },
     {
-      "date": "2026-11-13",
-      "time": "7:00 PM",
-      "show": "My Christmas Cowboy",
-      "where": "Hallmark, Frndly TV"
-    },
-    {
-      "date": "2026-11-14",
-      "time": "all day",
-      "show": "Frasier S1-2 arrives",
-      "where": "Prime"
-    },
-    {
       "date": "2026-11-17",
       "time": "7:00 PM",
       "show": "RHONY",
@@ -81,22 +63,10 @@
       "where": "E!"
     },
     {
-      "date": "2026-11-19",
-      "time": "7:00 PM",
-      "show": "The Traitors: New Blood finale",
-      "where": "NBC/Peacock"
-    },
-    {
       "date": "2026-11-24",
       "time": "9:00 PM",
       "show": "The Golden Life",
       "where": "E!"
-    },
-    {
-      "date": "2026-11-28",
-      "time": "",
-      "show": "Lifetime Christmas movies begin",
-      "where": "Lifetime"
     }
   ]
 }
