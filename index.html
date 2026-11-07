@@ -39,6 +39,30 @@ button,a.btn{font-family:inherit}
 #cond{font-size:4.6vmin;margin-left:3vmin;color:#fff}
 #hilo{font-size:4.2vmin;color:#ddd;margin-top:1vmin}
 #wxnote{font-size:2.6vmin;color:#888;margin-top:1vmin}
+#wxcard{cursor:pointer}
+.wxhead{display:block;margin-bottom:.4vmin}
+.wxhead .label{display:inline-block;margin:0 .8vmin 0 0;vertical-align:middle}
+.wxmore{display:inline-block;vertical-align:middle;font-size:2vmin;font-weight:700;color:#7fd6ff}
+#wxpanel{display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:8;background:#000;color:#fff;overflow:auto;-webkit-overflow-scrolling:touch;padding:2.2vmin}
+#wxpanel.on{display:block}
+.wxbar{display:table;width:100%;margin:0 0 1.6vmin}
+.wxbar .label{display:table-cell;vertical-align:middle;margin:0;font-size:3.2vmin;color:#fff}
+#wxclose{display:table-cell;width:28vmin;height:10vmin;min-height:10vmin;line-height:10vmin;vertical-align:middle;font-size:3.6vmin;font-weight:800;padding:0}
+#wxnow{font-size:8vmin;font-weight:800;line-height:1}
+#wxnow .ic{font-size:7vmin;margin-right:1.2vmin}
+#wxmeta{font-size:3.2vmin;color:#ddd;margin-top:.8vmin;line-height:1.35}
+#wxhours{white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:.6vmin 0 1.2vmin;font-size:0}
+.wxh{display:inline-block;vertical-align:top;width:13vmin;margin:0 .7vmin 0 0;text-align:center;background:#161616;border:2px solid #2a2a2a;border-radius:1.4vmin;padding:1vmin 0}
+.wxh .hr{font-size:2.2vmin;color:#bbb}
+.wxh .ic{font-size:4.2vmin;line-height:1.25}
+.wxh .tp{font-size:3vmin;font-weight:800}
+.wxh .pp{font-size:2.2vmin;color:#7fd6ff}
+.wxd{display:block;padding:1.1vmin 0;border-bottom:1px solid #2a2a2a;font-size:3.4vmin}
+.wxd span{display:inline-block;vertical-align:middle}
+.wxd .dn{width:16vmin;font-weight:700}
+.wxd .di{width:8vmin;text-align:center;font-size:4vmin}
+.wxd .dt{width:30vmin;font-weight:700}
+.wxd .dp{color:#7fd6ff}
 /* timers */
 .timer{background:#101820;border:2px solid #25323f;border-radius:2.2vmin;padding:1.6vmin;margin-bottom:1.6vmin}
 .timer:last-child{margin-bottom:0}
@@ -191,8 +215,8 @@ body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direct
       <div id="time">--:--<span id="ampm"></span></div>
       <div id="date">&nbsp;</div>
     </div>
-    <div class="card">
-      <div class="label">San Angelo, TX</div>
+    <div class="card" id="wxcard">
+      <div class="wxhead"><div class="label">San Angelo, TX</div><div class="wxmore">Forecast</div></div>
       <div id="wx"><span id="temp">--&deg;</span><span id="cond">Loading weather</span></div>
       <div id="hilo">&nbsp;</div>
       <div id="wxnote"></div>
@@ -259,9 +283,16 @@ body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direct
   </div>
  </div>
 </div>
+<div id="wxpanel">
+  <div class="wxbar">
+    <div class="label">San Angelo, TX</div>
+    <button type="button" class="btn" id="wxclose">Close</button>
+  </div>
+  <div id="wxbody"><div class="none">Loading forecast</div></div>
+</div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261106k"></script>
+<script src="pdfjs/pdf.min.js?v=20261106l"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
@@ -273,7 +304,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261106k";
+var KITCHEN_BUILD = "20261106l";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -344,23 +375,122 @@ var WX={0:"Clear",1:"Mostly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"F
 56:"Freezing drizzle",57:"Freezing drizzle",61:"Light rain",63:"Rain",65:"Heavy rain",66:"Freezing rain",67:"Freezing rain",
 71:"Light snow",73:"Snow",75:"Heavy snow",77:"Snow grains",80:"Light showers",81:"Showers",82:"Heavy showers",85:"Snow showers",86:"Snow showers",
 95:"Thunderstorm",96:"Thunderstorm, hail",99:"Thunderstorm, hail"};
-var WURL="https://api.open-meteo.com/v1/forecast?latitude=31.4638&longitude=-100.4370&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=America%2FChicago&forecast_days=1";
+var WURL="https://api.open-meteo.com/v1/forecast?latitude=31.4638&longitude=-100.4370&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FChicago&forecast_days=7";
+var lastWx=null;
+function wxIcon(code){
+  if(code===0||code===1)return "\u2600";
+  if(code===2)return "\u26C5";
+  if(code===3)return "\u2601";
+  if(code===45||code===48)return "\u2261";
+  if((code>=71&&code<=77)||code===85||code===86)return "\u2744";
+  if(code>=95)return "\u26A1";
+  if(code>=51)return "\u2614";
+  return "\u2601";
+}
+function rainTxt(p){
+  if(p==null||p!==p)return "\u2014";
+  return Math.round(p)+"% rain";
+}
+function hourLabel(iso){
+  var h=parseInt(String(iso).slice(11,13),10);
+  var ap=h<12?"AM":"PM", hr=h%12;
+  if(isNaN(h))return "";
+  if(hr===0)hr=12;
+  return hr+" "+ap;
+}
+function dayLabel(iso){
+  var p=String(iso).split("-"), dt, days;
+  if(p.length<3)return iso;
+  dt=new Date(Date.UTC(parseInt(p[0],10),parseInt(p[1],10)-1,parseInt(p[2],10),18,0,0));
+  days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  try{return new Intl.DateTimeFormat("en-US",{timeZone:"UTC",weekday:"short"}).format(dt);}catch(e){return days[dt.getUTCDay()];}
+}
+function chiKey(d){
+  var s,p,month,day,year,hour;
+  try{s=new Intl.DateTimeFormat("en-US",{timeZone:TZ,hour12:false,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit"}).format(d);}catch(e){return "";}
+  p=s.match(/(\d+)/g);
+  if(!p||p.length<4)return "";
+  month=p[0];day=p[1];year=p[2];hour=p[3];
+  if(hour==="24")hour="00";
+  if(month.length<2)month="0"+month;
+  if(day.length<2)day="0"+day;
+  if(hour.length<2)hour="0"+hour;
+  return year+"-"+month+"-"+day+"T"+hour;
+}
 function showWx(w,stale){
+  lastWx=w;
   $("temp").firstChild.nodeValue=Math.round(w.t)+"\u00B0";
   $("cond").firstChild.nodeValue=WX[w.c]||"";
   $("hilo").firstChild.nodeValue="High "+Math.round(w.hi)+"\u00B0   Low "+Math.round(w.lo)+"\u00B0";
   $("wxnote").firstChild.nodeValue=(stale?"Offline, showing last reading from ":"Updated ")+w.at;
+  if($("wxpanel").className==="on")renderForecast(w);
+}
+function renderForecast(w){
+  var box=$("wxbody"), h="", i, row, hours, days;
+  if(!box)return;
+  if(!w){box.innerHTML='<div class="none">Forecast unavailable</div>';return;}
+  h='<div id="wxnow"><span class="ic">'+wxIcon(w.c)+'</span>'+Math.round(w.t)+'\u00B0</div>';
+  h+='<div id="wxmeta">'+esc(WX[w.c]||"")+'<br>Feels like '+(w.feel==null?"\u2014":Math.round(w.feel)+"\u00B0");
+  h+='<br>Wind '+(w.wind==null?"\u2014":Math.round(w.wind)+" mph")+'</div>';
+  hours=w.hours||[];
+  h+='<div class="label">Next 12 hours</div><div id="wxhours">';
+  if(!hours.length)h+='<div class="none">Hourly forecast unavailable</div>';
+  for(i=0;i<hours.length;i++){
+    row=hours[i];
+    h+='<div class="wxh"><div class="hr">'+esc(row.h)+'</div><div class="ic">'+wxIcon(row.c)+'</div><div class="tp">'+Math.round(row.t)+'\u00B0</div><div class="pp">'+esc(rainTxt(row.p))+'</div></div>';
+  }
+  h+='</div><div class="label">7 days</div>';
+  days=w.days||[];
+  if(!days.length)h+='<div class="none">Daily forecast unavailable</div>';
+  for(i=0;i<days.length;i++){
+    row=days[i];
+    h+='<div class="wxd"><span class="dn">'+esc(row.d)+'</span><span class="di">'+wxIcon(row.c)+'</span><span class="dt">'+Math.round(row.hi)+'\u00B0 / '+Math.round(row.lo)+'\u00B0</span><span class="dp">'+esc(rainTxt(row.p))+'</span></div>';
+  }
+  box.innerHTML=h;
+}
+function openForecast(){
+  $("wxpanel").className="on";
+  if(lastWx)renderForecast(lastWx);
+  else $("wxbody").innerHTML='<div class="none">Loading forecast</div>';
+}
+function closeForecast(){
+  $("wxpanel").className="";
 }
 function loadWx(){
   xhr(WURL,function(err,j){
+    var d,t,w,hours,days,key,start,i,n,hi,lo;
     if(err||!j||!j.current||!j.daily){
       var c=lsGet("k_wx");
       if(c){showWx(c,true);}
       else{$("cond").firstChild.nodeValue="Weather unavailable";$("temp").firstChild.nodeValue="--\u00B0";}
       return;
     }
-    var d=new Date(),t=tfmt?tfmt.format(d):pad(d.getHours())+":"+pad(d.getMinutes());
-    var w={t:j.current.temperature_2m,c:j.current.weather_code,hi:j.daily.temperature_2m_max[0],lo:j.daily.temperature_2m_min[0],at:t};
+    d=new Date();
+    t=tfmt?tfmt.format(d):pad(d.getHours())+":"+pad(d.getMinutes());
+    hours=[];
+    if(j.hourly&&j.hourly.time){
+      key=chiKey(d);
+      start=0;
+      for(i=0;i<j.hourly.time.length;i++){
+        if(!key||String(j.hourly.time[i]).slice(0,13)>=key){start=i;break;}
+      }
+      n=j.hourly.time.length-start;
+      if(n>12)n=12;
+      for(i=0;i<n;i++){
+        hours.push({h:hourLabel(j.hourly.time[start+i]), t:j.hourly.temperature_2m[start+i], c:j.hourly.weather_code[start+i], p:j.hourly.precipitation_probability[start+i]});
+      }
+    }
+    days=[];
+    if(j.daily&&j.daily.time){
+      n=j.daily.time.length;
+      if(n>7)n=7;
+      for(i=0;i<n;i++){
+        hi=j.daily.temperature_2m_max[i];
+        lo=j.daily.temperature_2m_min[i];
+        days.push({d:dayLabel(j.daily.time[i]), hi:hi, lo:lo, c:j.daily.weather_code?j.daily.weather_code[i]:0, p:j.daily.precipitation_probability_max?j.daily.precipitation_probability_max[i]:null});
+      }
+    }
+    w={t:j.current.temperature_2m,c:j.current.weather_code,hi:j.daily.temperature_2m_max[0],lo:j.daily.temperature_2m_min[0],at:t,feel:j.current.apparent_temperature,wind:j.current.wind_speed_10m,hours:hours,days:days};
     lsSet("k_wx",w);showWx(w,false);
   });
 }
@@ -976,6 +1106,8 @@ paint();
 setInterval(function(){tickClock();checkTimers();},500);
 loadTv();
 loadManifest();
+if($("wxcard"))$("wxcard").addEventListener("click",openForecast,false);
+if($("wxclose"))$("wxclose").addEventListener("click",closeForecast,false);
 loadWx();setInterval(loadWx,30*60*1000);
 // when the iPad wakes or the app returns to the front, refresh everything
 document.addEventListener("visibilitychange",function(){
