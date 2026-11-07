@@ -100,9 +100,10 @@ button,a.btn{font-family:inherit}
 .tvwhere{display:block;color:#b9d0ff;font-size:16px;line-height:1.2}
 .tvempty{display:block;color:#9db4e6;font-size:20px;font-weight:700;text-align:center;margin-top:.8vmin}
 /* seasonal mascot */
-#mascot{position:fixed;left:0;top:0;width:78px;height:88px;z-index:6;pointer-events:none;opacity:.78;-webkit-transition:-webkit-transform 5.5s linear;transition:transform 5.5s linear}
+#mascot{position:fixed;left:0;top:0;width:78px;height:88px;z-index:6;pointer-events:none;opacity:.78;-webkit-transition:none;transition:none}
 #mascot.off{display:none}
 #mascot .bob{-webkit-animation:mascotbob .7s ease-in-out infinite alternate;animation:mascotbob .7s ease-in-out infinite alternate}
+#mascot .bob{-webkit-animation:none;animation:none}
 #mascot.paused .bob{-webkit-animation-play-state:paused;animation-play-state:paused}
 @-webkit-keyframes mascotbob{0%{-webkit-transform:translateY(0) rotate(-7deg)}100%{-webkit-transform:translateY(-6px) rotate(7deg)}}
 @keyframes mascotbob{0%{transform:translateY(0) rotate(-7deg)}100%{transform:translateY(-6px) rotate(7deg)}}
@@ -943,7 +944,7 @@ function mascotScoot(){
   el.style.transform=t;
   face=el.getElementsByTagName("div")[0];
   if(face){face.style.webkitTransform="scaleX("+flip+")";face.style.transform="scaleX("+flip+")";}
-  mascotTimer=setTimeout(mascotScoot,4800+Math.floor(Math.random()*2800));
+  mascotTimer=setTimeout(mascotScoot,300000);
 }
 function bootMascot(){
   var season=activeSeason(todayStr()),el,bob;
