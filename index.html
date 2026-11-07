@@ -83,31 +83,29 @@ button,a.btn{font-family:inherit}
 .btn.pause{background:#8a5a00;border-color:#ffb000}
 .btn.rst{-webkit-flex:1.4 1 0;flex:1.4 1 0;padding:0 1vmin;font-size:3.4vmin;background:#3a1d1d;border-color:#7a3030}
 .none{color:#aaa;font-size:3.8vmin}
-/* converter: block/table rows, no flex gap, safe on iOS 12 */
-#convert{display:block;position:static;float:none;overflow:visible}
-#convert .conv-head{display:table;position:static;float:none;width:100%;height:4.6vmin;margin:0 0 .4vmin;table-layout:fixed}
-#convert .conv-head .label{display:table-cell;float:none;position:static;width:auto;margin:0;height:4.6vmin;line-height:4.6vmin;font-size:2vmin;vertical-align:middle}
-#convert .conv-head .btn.ask{display:table-cell;float:none;position:static;width:24vmin;height:4.4vmin;min-height:4.4vmin;line-height:4.4vmin;margin:0;padding:0;vertical-align:middle;border-radius:999px;background:#1d9bf0;border-color:#5bb8f5;font-size:2vmin;text-align:center}
-#convert .btn{min-width:0;padding:0 .6vmin;float:none;position:static}
-#convert .btn.on{background:#1d3550;border-color:#7fd6ff}
-#conv-modes,#conv-fracs,.conv-amt,.conv-line,#conv-result,#conv-calc{display:block;position:static;float:none;clear:both;width:100%;margin:.4vmin 0 0}
-#conv-modes,#conv-fracs{height:6.2vmin;font-size:0;white-space:nowrap}
-#conv-modes .btn,#conv-fracs .btn{display:inline-block;vertical-align:top;float:none;position:static;height:6.2vmin;line-height:6.2vmin;margin:0 1% 0 0;padding:0}
-#conv-modes .btn{width:32%}
-#conv-modes .btn:last-child,#conv-fracs .btn:last-child{margin-right:0}
-#conv-fracs .btn{width:19%}
-.conv-amt{height:8vmin;font-size:0;white-space:nowrap}
-.conv-amt .btn,#conv-in{display:inline-block;vertical-align:top;float:none;position:static;height:8vmin;line-height:8vmin;margin:0;padding:0}
-#conv-minus,#conv-plus{width:8vmin;font-size:4vmin;font-weight:800}
-#conv-clear{width:16vmin;margin-left:1vmin;font-size:2.5vmin;font-weight:800;background:#3a1d1d;border-color:#c45c5c}
-#conv-in{width:-webkit-calc(100% - 35vmin);width:calc(100% - 35vmin);margin:0 1vmin;font-size:4vmin;font-weight:700;text-align:center;color:#fff;background:#101820;border:2px solid #3d5a80;border-radius:1.6vmin;-webkit-user-select:text;user-select:text;-webkit-appearance:none;appearance:none}
-.conv-line{height:6.2vmin;font-size:0;white-space:nowrap}
-.conv-k{display:inline-block;vertical-align:top;float:none;width:8vmin;height:6.2vmin;line-height:6.2vmin;margin:0;font-size:1.8vmin;letter-spacing:.06em;text-transform:uppercase;color:#9a9a9a;font-weight:600}
-.conv-units{display:inline-block;vertical-align:top;width:88%;height:6.2vmin;font-size:0;white-space:nowrap}
-.conv-units .btn{display:inline-block;vertical-align:top;float:none;position:static;height:6.2vmin;line-height:6.2vmin;margin:0;padding:0}
-.conv-out{font-size:5vmin;font-weight:800;line-height:1.05;color:#7fd6ff;margin:0;font-variant-numeric:tabular-nums}
-.conv-pretty{font-size:2.6vmin;font-weight:700;color:#ffb000;line-height:1.2;min-height:1.2em}
-#conv-calc{height:auto;overflow:visible}
+/* on tv */
+#tvcard{background:#0a2f86;border-color:#1d4eae;overflow:hidden}
+#tvcard .tvhead{display:table;width:100%;margin:0 0 .5vmin;table-layout:fixed}
+#tvcard .tvhead .label{display:table-cell;vertical-align:middle;margin:0;color:#ffe14a;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:3.2vmin;letter-spacing:.04em}
+#tvcard .btn.ask{display:table-cell;width:22vmin;height:4.2vmin;min-height:4.2vmin;line-height:4.2vmin;padding:0;vertical-align:middle;border-radius:999px;background:#1d9bf0;border-color:#5bb8f5;font-size:1.9vmin;text-align:center}
+#tvcols{display:table;width:100%;table-layout:fixed}
+.tvcol{display:table-cell;vertical-align:top;width:33%;padding:0 .35vmin}
+.tvcol .box{background:#071f5c;border:2px solid #143e9a;border-radius:1.2vmin;padding:.5vmin .4vmin .6vmin;min-height:18vmin}
+.tvcol.today .box{background:#123a8f;border-color:#ffe14a}
+.tvwhen{display:block;text-align:center;color:#ffe14a;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:2.3vmin;letter-spacing:.04em;line-height:1.1}
+.tvdate{display:block;text-align:center;color:#d6e2ff;font-size:1.9vmin;margin:0 0 .4vmin}
+.tvitem{display:block;margin:0 0 .55vmin;padding:.2vmin 0;border-top:1px solid #1d4eae}
+.tvtime{display:block;color:#ffe14a;font-size:20px;font-weight:800;line-height:1.15}
+.tvname{display:block;color:#fff;font-size:21px;font-weight:700;line-height:1.2}
+.tvwhere{display:block;color:#b9d0ff;font-size:16px;line-height:1.2}
+.tvempty{display:block;color:#9db4e6;font-size:20px;font-weight:700;text-align:center;margin-top:.8vmin}
+/* seasonal mascot */
+#mascot{position:fixed;left:0;top:0;width:78px;height:88px;z-index:6;pointer-events:none;opacity:.78;-webkit-transition:-webkit-transform 5.5s linear;transition:transform 5.5s linear}
+#mascot.off{display:none}
+#mascot .bob{-webkit-animation:mascotbob .7s ease-in-out infinite alternate;animation:mascotbob .7s ease-in-out infinite alternate}
+#mascot.paused .bob{-webkit-animation-play-state:paused;animation-play-state:paused}
+@-webkit-keyframes mascotbob{0%{-webkit-transform:translateY(0) rotate(-7deg)}100%{-webkit-transform:translateY(-6px) rotate(7deg)}}
+@keyframes mascotbob{0%{transform:translateY(0) rotate(-7deg)}100%{transform:translateY(-6px) rotate(7deg)}}
 /* links */
 #links .btn{width:100%;min-height:80px;font-size:3.8vmin;background:#222;border-color:#555}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
@@ -179,24 +177,7 @@ html,body{height:100%;overflow:hidden}
 #music.has-stations .btn.pandora{min-height:7vmin;font-size:3vmin}
 #music #stations:not(:empty){margin-top:.6vmin}
 #music .btn.station{min-height:8.2vmin;font-size:2.5vmin}
-#conv-modes,#conv-fracs{height:5vmin}
-#conv-modes .btn,#conv-fracs .btn{height:5vmin;min-height:5vmin;line-height:5vmin;font-size:2vmin}
-.conv-amt{height:6.6vmin}
-.conv-amt .btn,#conv-in{height:6.6vmin;min-height:6.6vmin;line-height:6.6vmin}
-.conv-line{height:5vmin}
-.conv-k,.conv-units,.conv-units .btn{height:5vmin;min-height:5vmin;line-height:5vmin}
-.conv-units .btn{font-size:2vmin}
-.conv-out{font-size:4vmin}
-#convert .conv-head .btn.ask{width:22vmin;height:4.2vmin;min-height:4.2vmin;line-height:4.2vmin;font-size:1.9vmin}
-body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column}
-#tvbar{position:relative;height:46px;overflow:hidden;background:#0a2f86;-webkit-flex:none;flex:none}
-#tvlabel{position:absolute;left:0;top:0;bottom:0;width:188px;z-index:2;background:#c8102e;color:#fff;text-align:center;line-height:46px;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:17px;font-weight:800;letter-spacing:.04em;text-shadow:1px 1px 0 #000}
-#tvwin{position:absolute;left:188px;right:0;top:0;bottom:0;overflow:hidden}
-#tvtrack{display:inline-block;white-space:nowrap;height:46px;line-height:46px;color:#ffe14a;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:36px;font-weight:800;text-shadow:2px 2px 0 #061833;-webkit-animation:tvmarquee 12s linear infinite;animation:tvmarquee 12s linear infinite}
-#tvtrack span{display:inline-block;padding-right:0}
-@-webkit-keyframes tvmarquee{0%{-webkit-transform:translate3d(0,0,0)}100%{-webkit-transform:translate3d(-50%,0,0)}}
-@keyframes tvmarquee{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-50%,0,0)}}
-#app{height:auto;-webkit-flex:1 1 auto;flex:1 1 auto;padding-top:.15vmin;padding-bottom:.15vmin}
+#app{height:100%;min-height:0;padding:1.2vmin}
 @media (orientation:portrait){
   html,body{overflow:auto}
   #time{font-size:18vmin}.tdisp{font-size:12vmin}
@@ -208,7 +189,7 @@ body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direct
 </style>
 </head>
 <body>
-<div id="tvbar"><div id="tvlabel">TONIGHT ON TV</div><div id="tvwin"><div id="tvtrack"><span id="tva">Tonight on TV</span><span id="tvb">Tonight on TV</span></div></div></div>
+<div id="mascot" class="off" aria-hidden="true"><div class="face"><div class="bob"></div></div></div>
 <div id="app">
  <div id="main">
   <div class="col" id="home-col">
@@ -250,36 +231,15 @@ body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direct
       <div class="label">Timers</div>
       <div id="timers"></div>
     </div>
-    <div class="card" id="convert">
-      <div class="conv-head">
-        <div class="label">Converter</div>
+    <div class="card" id="tvcard">
+      <div class="tvhead">
+        <div class="label">ON TV</div>
         <a class="btn ask" href="grokbot://app/v1/agent?id=d9c86fc8-4785-4529-8fc7-cec66682b4ae">Ask Grok Bot</a>
       </div>
-      <div id="conv-modes">
-        <button type="button" class="btn on" data-mode="vol">Volume</button>
-        <button type="button" class="btn" data-mode="wt">Weight</button>
-        <button type="button" class="btn" data-mode="temp">Temp</button>
-      </div>
-      <div id="conv-calc">
-        <div class="conv-amt">
-          <button type="button" class="btn" id="conv-minus" aria-label="Decrease">&#8722;</button>
-          <input id="conv-in" type="text" inputmode="decimal" value="1" autocomplete="off">
-          <button type="button" class="btn" id="conv-plus" aria-label="Increase">+</button>
-          <button type="button" class="btn" id="conv-clear">Clear</button>
-        </div>
-        <div id="conv-fracs">
-          <button type="button" class="btn" data-frac="1/4">1/4</button>
-          <button type="button" class="btn" data-frac="1/3">1/3</button>
-          <button type="button" class="btn" data-frac="1/2">1/2</button>
-          <button type="button" class="btn" data-frac="2/3">2/3</button>
-          <button type="button" class="btn" data-frac="3/4">3/4</button>
-        </div>
-        <div class="conv-line"><span class="conv-k">From</span><div class="conv-units" id="conv-from"></div></div>
-        <div class="conv-line"><span class="conv-k">To</span><div class="conv-units" id="conv-to"></div></div>
-      </div>
-      <div id="conv-result">
-        <div class="conv-out" id="conv-out">—</div>
-        <div class="conv-pretty" id="conv-pretty"></div>
+      <div id="tvcols">
+        <div class="tvcol"><div class="box" id="tv-yday"></div></div>
+        <div class="tvcol today"><div class="box" id="tv-today"></div></div>
+        <div class="tvcol"><div class="box" id="tv-tom"></div></div>
       </div>
     </div>
   </div>
@@ -294,7 +254,7 @@ body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direct
 </div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261106m"></script>
+<script src="pdfjs/pdf.min.js?v=20261106n"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
@@ -306,7 +266,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261106m";
+var KITCHEN_BUILD = "20261106n";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -827,178 +787,6 @@ if($("recipe-list"))$("recipe-list").addEventListener("click",function(e){
   }else showRecipe(parseInt(n.getAttribute("data-i"),10));
 },false);
 
-/* ---------- Converter ---------- */
-var CONV={
-  vol:{units:[{id:"tsp",n:"tsp",to:4.92892159375},{id:"tbsp",n:"tbsp",to:14.78676478125},{id:"cup",n:"cup",to:236.5882365},{id:"floz",n:"fl oz",to:29.5735295625},{id:"ml",n:"mL",to:1},{id:"l",n:"L",to:1000}],from:"cup",to:"ml",step:1},
-  wt:{units:[{id:"oz",n:"oz",to:28.349523125},{id:"lb",n:"lb",to:453.59237},{id:"g",n:"g",to:1},{id:"kg",n:"kg",to:1000}],from:"oz",to:"g",step:1},
-  temp:{units:[{id:"f",n:"\u00B0F"},{id:"c",n:"\u00B0C"}],from:"f",to:"c",step:5}
-};
-var FRACS=[[0,""],[0.125,"1/8"],[0.25,"1/4"],[1/3,"1/3"],[0.375,"3/8"],[0.5,"1/2"],[0.625,"5/8"],[2/3,"2/3"],[0.75,"3/4"],[0.875,"7/8"]];
-var convMode="vol", convFrom="cup", convTo="ml", convNote="";
-function convSpec(){return CONV[convMode]||CONV.vol;}
-function parseAmt(s){
-  var m;
-  s=String(s==null?"":s).replace(/^\s+|\s+$/g,"");
-  if(!s)return null;
-  m=/^(-?\d+)\s+(\d+)\s*\/\s*(\d+)$/.exec(s);
-  if(m)return (parseFloat(m[1])<0?-1:1)*(Math.abs(parseFloat(m[1]))+parseFloat(m[2])/parseFloat(m[3]));
-  m=/^(-?\d+)\s*\/\s*(\d+)$/.exec(s);
-  if(m&&parseFloat(m[2]))return parseFloat(m[1])/parseFloat(m[2]);
-  m=/^-?\d+(\.\d+)?$/.exec(s);
-  if(m)return parseFloat(s);
-  return null;
-}
-function fmtNum(n){
-  var a,d,s;
-  if(n==null||!isFinite(n))return "\u2014";
-  a=Math.abs(n);
-  d=a>=100?1:(a>=10?2:3);
-  s=n.toFixed(d);
-  return s.replace(/(\.\d*?)0+$/,"$1").replace(/\.$/,"");
-}
-function unitById(units,id){
-  var i;
-  for(i=0;i<units.length;i++)if(units[i].id===id)return units[i];
-  return units[0];
-}
-function convertAmt(n){
-  var spec,a,b;
-  if(n==null)return null;
-  if(convMode==="temp"){
-    if(convFrom===convTo)return n;
-    if(convFrom==="f")return (n-32)*5/9;
-    return n*9/5+32;
-  }
-  spec=convSpec();
-  a=unitById(spec.units,convFrom);
-  b=unitById(spec.units,convTo);
-  return n*a.to/b.to;
-}
-function fracText(n){
-  var neg=n<0,whole,part,best,bd,i,d,label;
-  if(!isFinite(n))return null;
-  n=Math.abs(n);
-  whole=Math.floor(n+1e-8);
-  part=n-whole;
-  if(part>0.97){whole++;part=0;}
-  best=FRACS[0];bd=1;
-  for(i=0;i<FRACS.length;i++){
-    d=Math.abs(part-FRACS[i][0]);
-    if(d<bd-1e-8){bd=d;best=FRACS[i];}
-  }
-  if(best[0]===1){whole++;best=FRACS[0];}
-  if(whole&&best[1])label=whole+" "+best[1];
-  else if(whole)label=String(whole);
-  else if(best[1])label=best[1];
-  else label="0";
-  return {text:(neg?"-":"")+label, close:bd<0.03};
-}
-function imperialFrac(id){
-  return id==="tsp"||id==="tbsp"||id==="cup"||id==="floz"||id==="oz"||id==="lb";
-}
-function paintUnitRow(id, selected){
-  var el=$(id), spec=convSpec(), h="", i, u;
-  if(!el)return;
-  for(i=0;i<spec.units.length;i++){
-    u=spec.units[i];
-    h+='<button type="button" class="btn'+(u.id===selected?" on":"")+'" data-u="'+u.id+'" style="width:'+(100/spec.units.length).toFixed(3)+'%">'+esc(u.n)+'</button>';
-  }
-  el.innerHTML=h;
-}
-function paintConv(){
-  var modes, i, n, out, u, pretty, fr, spec;
-  modes=$("conv-modes").getElementsByTagName("button");
-  for(i=0;i<modes.length;i++)modes[i].className="btn"+(modes[i].getAttribute("data-mode")===convMode?" on":"");
-  if($("conv-fracs"))$("conv-fracs").style.display=convMode==="temp"?"none":"";
-  spec=convSpec();
-  if(!unitById(spec.units,convFrom))convFrom=spec.from;
-  if(!unitById(spec.units,convTo))convTo=spec.to;
-  paintUnitRow("conv-from", convFrom);
-  paintUnitRow("conv-to", convTo);
-  n=parseAmt($("conv-in").value);
-  out=convertAmt(n);
-  u=unitById(spec.units,convTo);
-  pretty="";
-  if(out==null){
-    $("conv-out").firstChild.nodeValue="\u2014";
-  }else if(imperialFrac(convTo)){
-    fr=fracText(out);
-    if(fr&&fr.close){
-      $("conv-out").firstChild.nodeValue=fr.text+" "+u.n;
-      pretty=fmtNum(out)+" "+u.n;
-    }else{
-      $("conv-out").firstChild.nodeValue=fmtNum(out)+" "+u.n;
-      if(fr&&Math.abs(out)>=0.05)pretty="about "+fr.text+" "+u.n;
-    }
-  }else{
-    $("conv-out").firstChild.nodeValue=fmtNum(out)+" "+u.n;
-    if(imperialFrac(convFrom)){
-      fr=fracText(n);
-      if(fr&&(fr.close||/\//.test($("conv-in").value)))pretty=fr.text+" "+unitById(spec.units,convFrom).n;
-    }
-  }
-  if(convNote)pretty=convNote;
-  $("conv-pretty").firstChild?$("conv-pretty").firstChild.nodeValue=pretty:$("conv-pretty").appendChild(document.createTextNode(pretty));
-}
-function setConvMode(mode){
-  var spec;
-  convMode=mode;
-  convNote="";
-  spec=convSpec();
-  convFrom=spec.from;
-  convTo=spec.to;
-  paintConv();
-}
-function bootConverter(){
-  if(!$("conv-out").firstChild)$("conv-out").appendChild(document.createTextNode(""));
-  if(!$("conv-pretty").firstChild)$("conv-pretty").appendChild(document.createTextNode(""));
-  paintConv();
-  $("conv-modes").addEventListener("click",function(e){
-    var n=e.target;
-    while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-mode")))n=n.parentNode;
-    if(!n||n===this)return;
-    setConvMode(n.getAttribute("data-mode"));
-  },false);
-  $("conv-from").addEventListener("click",function(e){
-    var n=e.target;
-    while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-u")))n=n.parentNode;
-    if(!n||n===this)return;
-    convFrom=n.getAttribute("data-u");convNote="";paintConv();
-  },false);
-  $("conv-to").addEventListener("click",function(e){
-    var n=e.target;
-    while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-u")))n=n.parentNode;
-    if(!n||n===this)return;
-    convTo=n.getAttribute("data-u");convNote="";paintConv();
-  },false);
-  $("conv-fracs").addEventListener("click",function(e){
-    var n=e.target;
-    while(n&&n!==this&&!(n.getAttribute&&n.getAttribute("data-frac")))n=n.parentNode;
-    if(!n||n===this)return;
-    $("conv-in").value=n.getAttribute("data-frac");
-    convNote="";paintConv();
-  },false);
-  $("conv-minus").addEventListener("click",function(){
-    var n=parseAmt($("conv-in").value), step=convSpec().step||1;
-    if(n==null)n=0;
-    n=n-step;
-    if(convMode!=="temp"&&n<0)n=0;
-    $("conv-in").value=fmtNum(n);convNote="";paintConv();
-  },false);
-  $("conv-plus").addEventListener("click",function(){
-    var n=parseAmt($("conv-in").value), step=convSpec().step||1;
-    if(n==null)n=0;
-    n=n+step;
-    $("conv-in").value=fmtNum(n);convNote="";paintConv();
-  },false);
-  $("conv-in").addEventListener("input",function(){convNote="";paintConv();},false);
-  $("conv-clear").addEventListener("click",function(){
-    $("conv-in").value="";
-    convNote="";
-    paintConv();
-  },false);
-}
-
 /* ---------- TV ---------- */
 var TVDAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var TVMONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -1038,79 +826,151 @@ function tvSort(a,b){
   if(a.date!==b.date)return a.date<b.date?-1:1;
   return timeKey(a.time)-timeKey(b.time);
 }
-function buildTvLine(data){
-  var today,day,weekly,dated,todayItems,i,it,upcoming,parts;
-  today=todayStr();
-  day=chiWeekday(today);
+function shiftIso(iso,days){
+  var p=String(iso||"").split("-"),dt,y,m,d;
+  if(p.length<3)return iso;
+  dt=new Date(Date.UTC(parseInt(p[0],10),parseInt(p[1],10)-1,parseInt(p[2],10)+days,18,0,0));
+  y=dt.getUTCFullYear();m=dt.getUTCMonth()+1;d=dt.getUTCDate();
+  return y+"-"+(m<10?"0"+m:m)+"-"+(d<10?"0"+d:d);
+}
+function prettyDay(iso){
+  var wd=chiWeekday(iso);
+  return (wd>=0?TVDAYS[wd]+" ":"")+shortDate(iso);
+}
+function showsOn(data,iso){
+  var day=chiWeekday(iso),out=[],weekly,dated,i,it;
   weekly=(data&&data.weekly)||[];
   dated=(data&&data.dated)||[];
-  todayItems=[];
   for(i=0;i<weekly.length;i++){
     it=weekly[i];
     if(!it||it.day!==day)continue;
-    todayItems.push({date:today,time:it.time||"",show:it.show||"",where:it.where||""});
+    out.push({time:it.time||"",show:it.show||"",where:it.where||""});
   }
   for(i=0;i<dated.length;i++){
     it=dated[i];
-    if(!it||it.date!==today)continue;
-    todayItems.push({date:today,time:it.time||"",show:it.show||"",where:it.where||""});
+    if(!it||it.date!==iso)continue;
+    out.push({time:it.time||"",show:it.show||"",where:it.where||""});
   }
-  todayItems.sort(tvSort);
-  if(todayItems.length){
-    parts=[];
-    for(i=0;i<todayItems.length;i++)parts.push(tvItemText(todayItems[i],false));
-    return {label:"TONIGHT ON TV", text:parts.join("   \u2022   ")};
-  }
-  upcoming=[];
-  for(i=0;i<dated.length;i++){
-    it=dated[i];
-    if(!it||!it.date||it.date<=today)continue;
-    upcoming.push({date:it.date,time:it.time||"",show:it.show||"",where:it.where||""});
-  }
-  upcoming.sort(tvSort);
-  if(upcoming.length>3)upcoming=upcoming.slice(0,3);
-  if(!upcoming.length)return {label:"TONIGHT ON TV", text:"Nothing scheduled"};
-  parts=[];
-  for(i=0;i<upcoming.length;i++)parts.push(tvItemText(upcoming[i],true));
-  return {label:"COMING UP", text:parts.join("   \u2022   ")};
+  out.sort(function(a,b){return timeKey(a.time)-timeKey(b.time);});
+  return out;
 }
-function setSpan(el,text){
+function renderTvCol(id,title,iso,items){
+  var el=$(id),h="",i,it,time;
   if(!el)return;
-  if(el.firstChild)el.firstChild.nodeValue=text;
-  else el.appendChild(document.createTextNode(text));
-}
-function setTvText(pack){
-  var label,text,a,b,track,win,chunk,line,guard,dur;
-  label=(pack&&pack.label)||"TONIGHT ON TV";
-  text=(pack&&pack.text)||"";
-  setSpan($("tvlabel"),label);
-  a=$("tva");b=$("tvb");track=$("tvtrack");win=$("tvwin");
-  chunk=text+"    \u2022    ";
-  line=chunk;
-  setSpan(a,line);
-  setSpan(b,"");
-  guard=0;
-  while(a&&win&&a.offsetWidth<(win.offsetWidth||400)&&guard<12){
-    line+=chunk;
-    setSpan(a,line);
-    guard++;
+  h='<div class="tvwhen">'+title+'</div><div class="tvdate">'+esc(prettyDay(iso))+'</div>';
+  if(!items.length)h+='<div class="tvempty">Nothing listed</div>';
+  for(i=0;i<items.length;i++){
+    it=items[i];
+    time=it.time?it.time:"All day";
+    h+='<div class="tvitem"><div class="tvtime">'+esc(time)+'</div><div class="tvname">'+esc(it.show)+'</div>';
+    if(it.where)h+='<div class="tvwhere">'+esc(it.where)+'</div>';
+    h+='</div>';
   }
-  setSpan(b,line);
-  dur=Math.max(9,Math.round(String(line).length*0.15));
-  if(track){track.style.webkitAnimationDuration=dur+"s";track.style.animationDuration=dur+"s";}
+  el.innerHTML=h;
+}
+function renderTvBoard(data){
+  var today=todayStr();
+  renderTvCol("tv-yday","YESTERDAY",shiftIso(today,-1),showsOn(data,shiftIso(today,-1)));
+  renderTvCol("tv-today","TODAY",today,showsOn(data,today));
+  renderTvCol("tv-tom","TOMORROW",shiftIso(today,1),showsOn(data,shiftIso(today,1)));
 }
 function loadTv(){
   xhr("tv.json?v="+KITCHEN_BUILD+"&t="+(new Date().getTime()),function(err,j){
-    if(err||!j){var c=lsGet("k_tv");if(c)setTvText(buildTvLine(c));else setTvText({label:"TONIGHT ON TV",text:"Tonight on TV"});return;}
+    if(err||!j){var c=lsGet("k_tv");if(c)renderTvBoard(c);return;}
     lsSet("k_tv",j);
-    setTvText(buildTvLine(j));
+    renderTvBoard(j);
   });
 }
+
+/* ---------- Mascot ---------- */
+/* Add a season by appending {id, from, to, svg}. from/to are MM-DD or thanksgiving / day-after-thanksgiving. */
+var SEASONS=[
+  {id:"thanksgiving", from:"11-01", to:"thanksgiving", svg:"turkey"},
+  {id:"christmas", from:"day-after-thanksgiving", to:"12-26", svg:"santa"}
+];
+var MASCOT_SVG={
+  turkey:'<svg viewBox="0 0 80 96" width="80" height="96" aria-hidden="true"><ellipse cx="22" cy="40" rx="12" ry="18" fill="#e07a2f" transform="rotate(-28 22 40)"/><ellipse cx="58" cy="40" rx="12" ry="18" fill="#d4532a" transform="rotate(28 58 40)"/><ellipse cx="40" cy="28" rx="14" ry="16" fill="#f0a04a"/><ellipse cx="40" cy="50" rx="22" ry="24" fill="#c4622d"/><ellipse cx="40" cy="54" rx="13" ry="15" fill="#f6d7ae"/><circle cx="40" cy="32" r="11" fill="#e8b56a"/><ellipse cx="48" cy="34" rx="7" ry="4" fill="#f4c14d"/><circle cx="35" cy="30" r="2" fill="#222"/><path d="M33 36 q7 6 14 0" fill="#c23b3b"/><path d="M40 74 q5 8 0 16" stroke="#eee" fill="none" stroke-width="1.6"/></svg>',
+  santa:'<svg viewBox="0 0 80 96" width="80" height="96" aria-hidden="true"><path d="M18 40 L40 8 L66 38 Z" fill="#d0122d"/><circle cx="64" cy="16" r="6" fill="#fff"/><rect x="14" y="34" width="52" height="10" rx="5" fill="#fff"/><circle cx="40" cy="54" r="18" fill="#f3c7a1"/><circle cx="33" cy="52" r="2.2" fill="#222"/><circle cx="47" cy="52" r="2.2" fill="#222"/><ellipse cx="40" cy="64" rx="16" ry="10" fill="#fff"/><circle cx="40" cy="58" r="3.5" fill="#e07070"/></svg>'
+};
+var mascotTimer=null, mascotOn=false, mascotX=12;
+function thanksgivingDay(year){
+  var wd=new Date(Date.UTC(year,10,1,18,0,0)).getUTCDay();
+  return 1+((4-wd+7)%7)+21;
+}
+function seasonPoint(token,year){
+  var p,m,d;
+  if(token==="thanksgiving")return year+"-11-"+(thanksgivingDay(year)<10?"0":"")+thanksgivingDay(year);
+  if(token==="day-after-thanksgiving"){
+    d=thanksgivingDay(year)+1;
+    return year+"-11-"+(d<10?"0":"")+d;
+  }
+  p=String(token).split("-");
+  m=parseInt(p[0],10);d=parseInt(p[1],10);
+  return year+"-"+(m<10?"0"+m:m)+"-"+(d<10?"0"+d:d);
+}
+function activeSeason(today){
+  var year=parseInt(String(today).slice(0,4),10),i,s,a,b;
+  if(!year)return null;
+  for(i=0;i<SEASONS.length;i++){
+    s=SEASONS[i];
+    a=seasonPoint(s.from,year);
+    b=seasonPoint(s.to,year);
+    if(today>=a&&today<=b)return s;
+  }
+  return null;
+}
+function mascotEdge(){
+  var w=window.innerWidth||1024,h=window.innerHeight||768,pad=6,side,x,y;
+  side=Math.floor(Math.random()*4);
+  if(side===0){x=pad+Math.random()*(w-84);y=pad;}
+  else if(side===1){x=w-84;y=pad+Math.random()*(h-94);}
+  else if(side===2){x=pad+Math.random()*(w-84);y=h-94;}
+  else{x=pad;y=pad+Math.random()*(h-94);}
+  if(x<pad)x=pad;
+  if(y<pad)y=pad;
+  return {x:Math.round(x),y:Math.round(y)};
+}
+function mascotScoot(){
+  var el,face,p,flip,t;
+  if(document.hidden||!mascotOn){mascotTimer=null;return;}
+  el=$("mascot");
+  if(!el)return;
+  p=mascotEdge();
+  flip=p.x<mascotX?-1:1;
+  mascotX=p.x;
+  t="translate3d("+p.x+"px,"+p.y+"px,0)";
+  el.style.webkitTransform=t;
+  el.style.transform=t;
+  face=el.getElementsByTagName("div")[0];
+  if(face){face.style.webkitTransform="scaleX("+flip+")";face.style.transform="scaleX("+flip+")";}
+  mascotTimer=setTimeout(mascotScoot,4800+Math.floor(Math.random()*2800));
+}
+function bootMascot(){
+  var season=activeSeason(todayStr()),el,bob;
+  el=$("mascot");
+  if(!el)return;
+  if(!season||!MASCOT_SVG[season.svg]){el.className="off";mascotOn=false;return;}
+  bob=el.getElementsByTagName("div");
+  if(bob.length>1)bob[1].innerHTML=MASCOT_SVG[season.svg];
+  el.className="on "+season.id;
+  mascotOn=true;
+  mascotScoot();
+}
+document.addEventListener("visibilitychange",function(){
+  var el=$("mascot");
+  if(!mascotOn||!el)return;
+  if(document.hidden){
+    if(mascotTimer){clearTimeout(mascotTimer);mascotTimer=null;}
+    el.className=el.className+" paused";
+  }else{
+    el.className=el.className.replace(/\bpaused\b/g,"").replace(/\s+/g," ");
+    if(!mascotTimer)mascotScoot();
+  }
+},false);
 
 /* ---------- Boot ---------- */
 buildTimers();
 renderStations();
-bootConverter();
 if(!$("ampm").firstChild)$("ampm").appendChild(document.createTextNode(""));
 if(!$("wxnote").firstChild)$("wxnote").appendChild(document.createTextNode(""));
 tickClock();
@@ -1125,6 +985,7 @@ tickClock();
 paint();
 setInterval(function(){tickClock();checkTimers();},500);
 loadTv();
+bootMascot();
 loadManifest();
 if($("wxcard"))$("wxcard").addEventListener("click",openForecast,false);
 if($("wxclose"))$("wxclose").addEventListener("click",closeForecast,false);
