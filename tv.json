@@ -40,6 +40,12 @@
     },
     {
       "date": "2026-11-12",
+      "time": "7:00 PM",
+      "show": "The Traitors: New Blood",
+      "where": "NBC/Peacock"
+    },
+    {
+      "date": "2026-11-12",
       "time": "8:00 PM",
       "show": "Southern Charm S12 premiere",
       "where": "Bravo"
@@ -63,10 +69,51 @@
       "where": "E!"
     },
     {
+      "date": "2026-11-19",
+      "time": "7:00 PM",
+      "show": "The Traitors: New Blood finale",
+      "where": "NBC/Peacock"
+    },
+    {
+      "date": "2026-11-19",
+      "time": "8:00 PM",
+      "show": "The Traitors: New Blood finale",
+      "where": "NBC/Peacock"
+    },
+    {
       "date": "2026-11-24",
       "time": "9:00 PM",
       "show": "The Golden Life",
       "where": "E!"
     }
+  ],
+  "watchlist": [
+    "90 Day: The Other Way",
+    "Sister Wives",
+    "RHONY",
+    "The Golden Life",
+    "RHOSLC",
+    "RHOC",
+    "The Traitors: New Blood",
+    "Southern Charm",
+    "The Secret Lives of Mormon Wives: Orange County",
+    "Summer House",
+    "Ladies of London",
+    "90 Day Fianc\u00e9",
+    "RH: Ultimate Girls Trip",
+    "Love Is Blind: UK",
+    "90 Day: The Last Resort",
+    "The Valley",
+    "The Bachelorette",
+    "Wild Cherry",
+    "The Five Star Weekend",
+    "Not Suitable for Work",
+    "RH Ultimate Girls Trip: South Africa",
+    "RH of Rhode Island",
+    "In the City",
+    "House of Stassi",
+    "Million Dollar Nannies",
+    "Double Lives of Suburban Wives",
+    "Let's Marry Harry"
   ]
 }
