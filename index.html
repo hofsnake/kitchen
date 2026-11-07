@@ -159,19 +159,19 @@ body.recipes-open #recipes{display:-webkit-flex;display:flex;-webkit-flex-direct
 html,body{height:100%;overflow:hidden}
 #app{height:100%;min-height:0;padding:1.5vmin}
 #main{min-height:0}
-.card{padding:1.15vmin;margin-bottom:1.05vmin}
+.card{padding:1vmin;margin-bottom:.8vmin}
 .col+.col{margin-left:1.5vmin}
 .label{font-size:2vmin;margin-bottom:.6vmin}
-#time{font-size:13vmin}
+#time{font-size:12vmin}
 #ampm{font-size:5vmin}
 #date{font-size:3.6vmin;margin-top:.6vmin}
 #temp{font-size:8.5vmin}
 #cond{font-size:3.8vmin}
 #hilo{font-size:3.4vmin;margin-top:.4vmin}
 #wxnote{font-size:2.2vmin;margin-top:.3vmin}
-.timer{padding:1.2vmin;margin-bottom:1.2vmin}
-.tdisp{font-size:8vmin;margin:.2vmin 0 .6vmin}
-.btn{min-height:7vmin;font-size:3vmin}
+.timer{padding:1vmin;margin-bottom:.7vmin}
+.tdisp{font-size:7.2vmin;margin:.2vmin 0 .5vmin}
+.btn{min-height:6.4vmin;font-size:2.8vmin}
 .btn.rst{font-size:2.8vmin}
 #links .btn{min-height:9vmin;font-size:3.4vmin}
 #links .btn.foodie{background:#e8772e;border-color:#ffa060}
@@ -189,11 +189,13 @@ html,body{height:100%;overflow:hidden}
 .conv-out{font-size:4vmin}
 #convert .conv-head .btn.ask{width:22vmin;height:4.2vmin;min-height:4.2vmin;line-height:4.2vmin;font-size:1.9vmin}
 body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column}
-#tvbar{height:16px;line-height:16px;overflow:hidden;background:#0c1218;color:#ffb000;font-size:13px;font-weight:700;white-space:nowrap;border-bottom:1px solid #25323f;-webkit-flex:none;flex:none}
-#tvtrack{display:inline-block;white-space:nowrap;-webkit-animation:tvmarquee 22s linear infinite;animation:tvmarquee 22s linear infinite}
-#tvtrack span{display:inline-block;padding-right:6vmin}
-@-webkit-keyframes tvmarquee{0%{-webkit-transform:translateX(0)}100%{-webkit-transform:translateX(-50%)}}
-@keyframes tvmarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+#tvbar{position:relative;height:46px;overflow:hidden;background:#0a2f86;-webkit-flex:none;flex:none}
+#tvlabel{position:absolute;left:0;top:0;bottom:0;width:188px;z-index:2;background:#c8102e;color:#fff;text-align:center;line-height:46px;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:17px;font-weight:800;letter-spacing:.04em;text-shadow:1px 1px 0 #000}
+#tvwin{position:absolute;left:188px;right:0;top:0;bottom:0;overflow:hidden}
+#tvtrack{display:inline-block;white-space:nowrap;height:46px;line-height:46px;color:#ffe14a;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:36px;font-weight:800;text-shadow:2px 2px 0 #061833;-webkit-animation:tvmarquee 12s linear infinite;animation:tvmarquee 12s linear infinite}
+#tvtrack span{display:inline-block;padding-right:0}
+@-webkit-keyframes tvmarquee{0%{-webkit-transform:translate3d(0,0,0)}100%{-webkit-transform:translate3d(-50%,0,0)}}
+@keyframes tvmarquee{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-50%,0,0)}}
 #app{height:auto;-webkit-flex:1 1 auto;flex:1 1 auto;padding-top:.15vmin;padding-bottom:.15vmin}
 @media (orientation:portrait){
   html,body{overflow:auto}
@@ -206,7 +208,7 @@ body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direct
 </style>
 </head>
 <body>
-<div id="tvbar"><div id="tvtrack"><span id="tva">Tonight on TV</span><span id="tvb">Tonight on TV</span></div></div>
+<div id="tvbar"><div id="tvlabel">TONIGHT ON TV</div><div id="tvwin"><div id="tvtrack"><span id="tva">Tonight on TV</span><span id="tvb">Tonight on TV</span></div></div></div>
 <div id="app">
  <div id="main">
   <div class="col" id="home-col">
@@ -292,7 +294,7 @@ body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direct
 </div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261106l"></script>
+<script src="pdfjs/pdf.min.js?v=20261106m"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
@@ -304,7 +306,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261106l";
+var KITCHEN_BUILD = "20261106m";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -1057,7 +1059,7 @@ function buildTvLine(data){
   if(todayItems.length){
     parts=[];
     for(i=0;i<todayItems.length;i++)parts.push(tvItemText(todayItems[i],false));
-    return "Tonight:  "+parts.join("   \u2022   ");
+    return {label:"TONIGHT ON TV", text:parts.join("   \u2022   ")};
   }
   upcoming=[];
   for(i=0;i<dated.length;i++){
@@ -1067,21 +1069,39 @@ function buildTvLine(data){
   }
   upcoming.sort(tvSort);
   if(upcoming.length>3)upcoming=upcoming.slice(0,3);
-  if(!upcoming.length)return "Tonight on TV: nothing scheduled";
+  if(!upcoming.length)return {label:"TONIGHT ON TV", text:"Nothing scheduled"};
   parts=[];
   for(i=0;i<upcoming.length;i++)parts.push(tvItemText(upcoming[i],true));
-  return "Coming up:  "+parts.join("   \u2022   ");
+  return {label:"COMING UP", text:parts.join("   \u2022   ")};
 }
-function setTvText(text){
-  var a=$("tva"),b=$("tvb"),track=$("tvtrack"),dur;
-  if(a){if(a.firstChild)a.firstChild.nodeValue=text;else a.appendChild(document.createTextNode(text));}
-  if(b){if(b.firstChild)b.firstChild.nodeValue=text;else b.appendChild(document.createTextNode(text));}
-  dur=Math.max(18,Math.round(String(text).length*0.28));
+function setSpan(el,text){
+  if(!el)return;
+  if(el.firstChild)el.firstChild.nodeValue=text;
+  else el.appendChild(document.createTextNode(text));
+}
+function setTvText(pack){
+  var label,text,a,b,track,win,chunk,line,guard,dur;
+  label=(pack&&pack.label)||"TONIGHT ON TV";
+  text=(pack&&pack.text)||"";
+  setSpan($("tvlabel"),label);
+  a=$("tva");b=$("tvb");track=$("tvtrack");win=$("tvwin");
+  chunk=text+"    \u2022    ";
+  line=chunk;
+  setSpan(a,line);
+  setSpan(b,"");
+  guard=0;
+  while(a&&win&&a.offsetWidth<(win.offsetWidth||400)&&guard<12){
+    line+=chunk;
+    setSpan(a,line);
+    guard++;
+  }
+  setSpan(b,line);
+  dur=Math.max(9,Math.round(String(line).length*0.15));
   if(track){track.style.webkitAnimationDuration=dur+"s";track.style.animationDuration=dur+"s";}
 }
 function loadTv(){
   xhr("tv.json?v="+KITCHEN_BUILD+"&t="+(new Date().getTime()),function(err,j){
-    if(err||!j){var c=lsGet("k_tv");if(c)setTvText(buildTvLine(c));else setTvText("Tonight on TV");return;}
+    if(err||!j){var c=lsGet("k_tv");if(c)setTvText(buildTvLine(c));else setTvText({label:"TONIGHT ON TV",text:"Tonight on TV"});return;}
     lsSet("k_tv",j);
     setTvText(buildTvLine(j));
   });
