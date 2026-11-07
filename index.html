@@ -135,7 +135,7 @@ body.recipes-open #recipes{display:-webkit-flex;display:flex;-webkit-flex-direct
 html,body{height:100%;overflow:hidden}
 #app{height:100%;min-height:0;padding:1.5vmin}
 #main{min-height:0}
-.card{padding:1.4vmin;margin-bottom:1.4vmin}
+.card{padding:1.15vmin;margin-bottom:1.05vmin}
 .col+.col{margin-left:1.5vmin}
 .label{font-size:2vmin;margin-bottom:.6vmin}
 #time{font-size:13vmin}
@@ -164,6 +164,13 @@ html,body{height:100%;overflow:hidden}
 .conv-units .btn{font-size:2vmin}
 .conv-out{font-size:4vmin}
 #convert .conv-head .btn.ask{width:22vmin;height:4.2vmin;min-height:4.2vmin;line-height:4.2vmin;font-size:1.9vmin}
+body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column}
+#tvbar{height:16px;line-height:16px;overflow:hidden;background:#0c1218;color:#ffb000;font-size:13px;font-weight:700;white-space:nowrap;border-bottom:1px solid #25323f;-webkit-flex:none;flex:none}
+#tvtrack{display:inline-block;white-space:nowrap;-webkit-animation:tvmarquee 22s linear infinite;animation:tvmarquee 22s linear infinite}
+#tvtrack span{display:inline-block;padding-right:6vmin}
+@-webkit-keyframes tvmarquee{0%{-webkit-transform:translateX(0)}100%{-webkit-transform:translateX(-50%)}}
+@keyframes tvmarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+#app{height:auto;-webkit-flex:1 1 auto;flex:1 1 auto;padding-top:.15vmin;padding-bottom:.15vmin}
 @media (orientation:portrait){
   html,body{overflow:auto}
   #time{font-size:18vmin}.tdisp{font-size:12vmin}
@@ -175,6 +182,7 @@ html,body{height:100%;overflow:hidden}
 </style>
 </head>
 <body>
+<div id="tvbar"><div id="tvtrack"><span id="tva">Tonight on TV</span><span id="tvb">Tonight on TV</span></div></div>
 <div id="app">
  <div id="main">
   <div class="col" id="home-col">
@@ -253,7 +261,7 @@ html,body{height:100%;overflow:hidden}
 </div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261106i"></script>
+<script src="pdfjs/pdf.min.js?v=20261106k"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
@@ -265,7 +273,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261106i";
+var KITCHEN_BUILD = "20261106k";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -859,6 +867,96 @@ function bootConverter(){
   },false);
 }
 
+/* ---------- TV ---------- */
+var TVDAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var TVMONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function timeKey(t){
+  var s,m,h,min,ap;
+  s=String(t==null?"":t).replace(/^\s+|\s+$/g,"");
+  if(!s||/^all day$/i.test(s))return -1;
+  m=/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec(s);
+  if(!m)return 24*60;
+  h=parseInt(m[1],10);min=parseInt(m[2],10);ap=m[3].toUpperCase();
+  if(ap==="PM"&&h<12)h+=12;
+  if(ap==="AM"&&h===12)h=0;
+  return h*60+min;
+}
+function chiWeekday(iso){
+  var p=String(iso||"").split("-"),dt;
+  if(p.length<3)return -1;
+  dt=new Date(Date.UTC(parseInt(p[0],10),parseInt(p[1],10)-1,parseInt(p[2],10),18,0,0));
+  return dt.getUTCDay();
+}
+function shortDate(iso){
+  var p=String(iso||"").split("-"),m,d;
+  m=parseInt(p[1],10);d=parseInt(p[2],10);
+  if(!m||!d)return iso;
+  return TVMONTHS[m-1]+" "+d;
+}
+function tvItemText(it,showDate){
+  var parts=[],name;
+  if(showDate&&it.date)parts.push(shortDate(it.date));
+  if(it.time)parts.push(it.time);
+  name=it.show||"";
+  if(it.where)name+=" ("+it.where+")";
+  parts.push(name);
+  return parts.join("  ");
+}
+function tvSort(a,b){
+  if(a.date!==b.date)return a.date<b.date?-1:1;
+  return timeKey(a.time)-timeKey(b.time);
+}
+function buildTvLine(data){
+  var today,day,weekly,dated,todayItems,i,it,upcoming,parts;
+  today=todayStr();
+  day=chiWeekday(today);
+  weekly=(data&&data.weekly)||[];
+  dated=(data&&data.dated)||[];
+  todayItems=[];
+  for(i=0;i<weekly.length;i++){
+    it=weekly[i];
+    if(!it||it.day!==day)continue;
+    todayItems.push({date:today,time:it.time||"",show:it.show||"",where:it.where||""});
+  }
+  for(i=0;i<dated.length;i++){
+    it=dated[i];
+    if(!it||it.date!==today)continue;
+    todayItems.push({date:today,time:it.time||"",show:it.show||"",where:it.where||""});
+  }
+  todayItems.sort(tvSort);
+  if(todayItems.length){
+    parts=[];
+    for(i=0;i<todayItems.length;i++)parts.push(tvItemText(todayItems[i],false));
+    return "Tonight:  "+parts.join("   \u2022   ");
+  }
+  upcoming=[];
+  for(i=0;i<dated.length;i++){
+    it=dated[i];
+    if(!it||!it.date||it.date<=today)continue;
+    upcoming.push({date:it.date,time:it.time||"",show:it.show||"",where:it.where||""});
+  }
+  upcoming.sort(tvSort);
+  if(upcoming.length>3)upcoming=upcoming.slice(0,3);
+  if(!upcoming.length)return "Tonight on TV: nothing scheduled";
+  parts=[];
+  for(i=0;i<upcoming.length;i++)parts.push(tvItemText(upcoming[i],true));
+  return "Coming up:  "+parts.join("   \u2022   ");
+}
+function setTvText(text){
+  var a=$("tva"),b=$("tvb"),track=$("tvtrack"),dur;
+  if(a){if(a.firstChild)a.firstChild.nodeValue=text;else a.appendChild(document.createTextNode(text));}
+  if(b){if(b.firstChild)b.firstChild.nodeValue=text;else b.appendChild(document.createTextNode(text));}
+  dur=Math.max(18,Math.round(String(text).length*0.28));
+  if(track){track.style.webkitAnimationDuration=dur+"s";track.style.animationDuration=dur+"s";}
+}
+function loadTv(){
+  xhr("tv.json?v="+KITCHEN_BUILD+"&t="+(new Date().getTime()),function(err,j){
+    if(err||!j){var c=lsGet("k_tv");if(c)setTvText(buildTvLine(c));else setTvText("Tonight on TV");return;}
+    lsSet("k_tv",j);
+    setTvText(buildTvLine(j));
+  });
+}
+
 /* ---------- Boot ---------- */
 buildTimers();
 renderStations();
@@ -876,6 +974,7 @@ tickClock();
 })();
 paint();
 setInterval(function(){tickClock();checkTimers();},500);
+loadTv();
 loadManifest();
 loadWx();setInterval(loadWx,30*60*1000);
 // when the iPad wakes or the app returns to the front, refresh everything
