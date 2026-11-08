@@ -1,18 +1,5 @@
 {
-  "weekly": [
-    {
-      "day": 0,
-      "time": "7:00 PM",
-      "show": "90 Day: The Other Way",
-      "where": "TLC/Max"
-    },
-    {
-      "day": 0,
-      "time": "9:00 PM",
-      "show": "Sister Wives",
-      "where": "TLC/Max"
-    }
-  ],
+  "weekly": [],
   "dated": [
     {
       "date": "2026-11-08",
@@ -21,40 +8,70 @@
       "where": "Local TV"
     },
     {
+      "date": "2026-11-08",
+      "time": "7pm",
+      "show": "90 Day: The Other Way",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-08",
+      "time": "9pm",
+      "show": "Sister Wives",
+      "where": "TLC"
+    },
+    {
       "date": "2026-11-09",
       "time": "7pm",
       "show": "Mavs vs Pacers",
       "where": "Local TV"
     },
     {
+      "date": "2026-11-09",
+      "time": "7pm",
+      "show": "90 Day: Hunt for Love",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-09",
+      "time": "8pm",
+      "show": "Hunt for Love: Between the Sheets",
+      "where": "TLC"
+    },
+    {
       "date": "2026-11-10",
-      "time": "7:00 PM",
+      "time": "7pm",
       "show": "RHONY",
       "where": "Bravo"
     },
     {
       "date": "2026-11-10",
-      "time": "9:00 PM",
+      "time": "9pm",
       "show": "The Golden Life",
       "where": "E!"
     },
     {
       "date": "2026-11-11",
-      "time": "7:00 PM",
+      "time": "7pm",
       "show": "RHOSLC",
       "where": "Bravo"
     },
     {
       "date": "2026-11-12",
-      "time": "7:00 PM",
-      "show": "RHOC Reunion Pt 2",
+      "time": "",
+      "show": "Mormon Wives: OC premiere, all eps",
+      "where": "Hulu"
+    },
+    {
+      "date": "2026-11-12",
+      "time": "7pm",
+      "show": "RHOC Reunion Pt 2 finale",
       "where": "Bravo"
     },
     {
       "date": "2026-11-12",
-      "time": "7:00 PM",
-      "show": "The Traitors: New Blood",
-      "where": "NBC/Peacock"
+      "time": "7pm",
+      "show": "The Traitors",
+      "where": "NBC"
     },
     {
       "date": "2026-11-12",
@@ -64,15 +81,9 @@
     },
     {
       "date": "2026-11-12",
-      "time": "8:00 PM",
-      "show": "Southern Charm S12 premiere",
+      "time": "8pm",
+      "show": "Southern Charm premiere",
       "where": "Bravo"
-    },
-    {
-      "date": "2026-11-12",
-      "time": "all day",
-      "show": "Secret Lives of Mormon Wives: OC (all episodes)",
-      "where": "Hulu"
     },
     {
       "date": "2026-11-14",
@@ -87,20 +98,44 @@
       "where": "Local TV"
     },
     {
+      "date": "2026-11-15",
+      "time": "7pm",
+      "show": "90 Day: The Other Way",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-15",
+      "time": "9pm",
+      "show": "Sister Wives",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-16",
+      "time": "7pm",
+      "show": "90 Day: Hunt for Love",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-16",
+      "time": "8pm",
+      "show": "Between the Sheets",
+      "where": "TLC"
+    },
+    {
       "date": "2026-11-17",
-      "time": "7:00 PM",
+      "time": "7pm",
       "show": "RHONY",
       "where": "Bravo"
     },
     {
       "date": "2026-11-17",
-      "time": "9:00 PM",
+      "time": "9pm",
       "show": "The Golden Life",
       "where": "E!"
     },
     {
       "date": "2026-11-18",
-      "time": "7:00 PM",
+      "time": "7pm",
       "show": "RHOSLC",
       "where": "Bravo"
     },
@@ -112,13 +147,19 @@
     },
     {
       "date": "2026-11-19",
-      "time": "7:00 PM",
-      "show": "The Traitors: New Blood finale",
-      "where": "NBC/Peacock"
+      "time": "7pm",
+      "show": "The Traitors finale pt 1",
+      "where": "NBC"
     },
     {
       "date": "2026-11-19",
-      "time": "8:00 PM",
+      "time": "8pm",
+      "show": "The Traitors finale pt 2",
+      "where": "NBC"
+    },
+    {
+      "date": "2026-11-19",
+      "time": "8pm",
       "show": "Southern Charm",
       "where": "Bravo"
     },
@@ -133,6 +174,18 @@
       "time": "6pm",
       "show": "Mavs at Jazz",
       "where": "Local TV"
+    },
+    {
+      "date": "2026-11-22",
+      "time": "7pm",
+      "show": "90 Day: The Other Way",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-22",
+      "time": "9pm",
+      "show": "Sister Wives",
+      "where": "TLC"
     }
   ],
   "watchlist": [
