@@ -15,12 +15,6 @@
   ],
   "dated": [
     {
-      "date": "2026-11-05",
-      "time": "7:00 PM",
-      "show": "RHOC Reunion Pt 1",
-      "where": "Bravo"
-    },
-    {
       "date": "2026-11-08",
       "time": "6:30pm",
       "show": "Mavs vs Nets",
@@ -106,6 +100,12 @@
     },
     {
       "date": "2026-11-18",
+      "time": "7:00 PM",
+      "show": "RHOSLC",
+      "where": "Bravo"
+    },
+    {
+      "date": "2026-11-18",
       "time": "8:30pm",
       "show": "Mavs vs Warriors",
       "where": "ESPN"
@@ -119,8 +119,8 @@
     {
       "date": "2026-11-19",
       "time": "8:00 PM",
-      "show": "The Traitors: New Blood finale",
-      "where": "NBC/Peacock"
+      "show": "Southern Charm",
+      "where": "Bravo"
     },
     {
       "date": "2026-11-21",
@@ -129,10 +129,10 @@
       "where": "Local TV"
     },
     {
-      "date": "2026-11-24",
-      "time": "9:00 PM",
-      "show": "The Golden Life",
-      "where": "E!"
+      "date": "2026-11-22",
+      "time": "6pm",
+      "show": "Mavs at Jazz",
+      "where": "Local TV"
     }
   ],
   "watchlist": [
@@ -147,7 +147,7 @@
     "The Secret Lives of Mormon Wives: Orange County",
     "Summer House",
     "Ladies of London",
-    "90 Day Fianc\u00e9",
+    "90 Day Fiancé",
     "RH: Ultimate Girls Trip",
     "Love Is Blind: UK",
     "90 Day: The Last Resort",
