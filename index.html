@@ -255,7 +255,7 @@ html,body{height:100%;overflow:hidden}
 </div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261108a"></script>
+<script src="pdfjs/pdf.min.js?v=20261108b"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
@@ -267,7 +267,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261108a";
+var KITCHEN_BUILD = "20261108b";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -856,14 +856,15 @@ function showsOn(data,iso){
   return out;
 }
 function renderTvCol(id,title,iso,items){
-  var el=$(id),h="",i,it,time;
+  var el=$(id),h="",i,it;
   if(!el)return;
   h='<div class="tvwhen">'+title+'</div><div class="tvdate">'+esc(prettyDay(iso))+'</div>';
   if(!items.length)h+='<div class="tvempty">Nothing listed</div>';
   for(i=0;i<items.length;i++){
     it=items[i];
-    time=it.time?it.time:"All day";
-    h+='<div class="tvitem"><div class="tvtime">'+esc(time)+'</div><div class="tvname">'+esc(it.show)+'</div>';
+    h+='<div class="tvitem">';
+    if(it.time)h+='<div class="tvtime">'+esc(it.time)+'</div>';
+    h+='<div class="tvname">'+esc(it.show)+'</div>';
     if(it.where)h+='<div class="tvwhere">'+esc(it.where)+'</div>';
     h+='</div>';
   }
