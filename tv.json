@@ -21,6 +21,18 @@
       "where": "Bravo"
     },
     {
+      "date": "2026-11-08",
+      "time": "6:30pm",
+      "show": "Mavs vs Nets",
+      "where": "Local TV"
+    },
+    {
+      "date": "2026-11-09",
+      "time": "7pm",
+      "show": "Mavs vs Pacers",
+      "where": "Local TV"
+    },
+    {
       "date": "2026-11-10",
       "time": "7:00 PM",
       "show": "RHONY",
@@ -52,6 +64,12 @@
     },
     {
       "date": "2026-11-12",
+      "time": "7pm",
+      "show": "Mavs at Timberwolves",
+      "where": "NBA TV"
+    },
+    {
+      "date": "2026-11-12",
       "time": "8:00 PM",
       "show": "Southern Charm S12 premiere",
       "where": "Bravo"
@@ -61,6 +79,18 @@
       "time": "all day",
       "show": "Secret Lives of Mormon Wives: OC (all episodes)",
       "where": "Hulu"
+    },
+    {
+      "date": "2026-11-14",
+      "time": "6:30pm",
+      "show": "Mavs at Cavaliers",
+      "where": "Local TV"
+    },
+    {
+      "date": "2026-11-15",
+      "time": "5pm",
+      "show": "Mavs at Celtics",
+      "where": "Local TV"
     },
     {
       "date": "2026-11-17",
@@ -75,6 +105,12 @@
       "where": "E!"
     },
     {
+      "date": "2026-11-18",
+      "time": "8:30pm",
+      "show": "Mavs vs Warriors",
+      "where": "ESPN"
+    },
+    {
       "date": "2026-11-19",
       "time": "7:00 PM",
       "show": "The Traitors: New Blood finale",
@@ -85,6 +121,12 @@
       "time": "8:00 PM",
       "show": "The Traitors: New Blood finale",
       "where": "NBC/Peacock"
+    },
+    {
+      "date": "2026-11-21",
+      "time": "7pm",
+      "show": "Mavs vs Clippers",
+      "where": "Local TV"
     },
     {
       "date": "2026-11-24",

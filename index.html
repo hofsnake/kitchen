@@ -255,7 +255,7 @@ html,body{height:100%;overflow:hidden}
 </div>
 <div id="alarm"><div class="big">TIME'S UP</div><div class="sm" id="alarmname">&nbsp;</div><div class="sm">Tap anywhere to stop</div></div>
 
-<script src="pdfjs/pdf.min.js?v=20261106n"></script>
+<script src="pdfjs/pdf.min.js?v=20261108a"></script>
 <script>
 /* Favorite Pandora stations. Each { label, url } becomes a button under Open Pandora.
    About two stations fit on one row of the iPad screen. Example:
@@ -267,7 +267,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261106n";
+var KITCHEN_BUILD = "20261108a";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -795,9 +795,9 @@ function timeKey(t){
   var s,m,h,min,ap;
   s=String(t==null?"":t).replace(/^\s+|\s+$/g,"");
   if(!s||/^all day$/i.test(s))return -1;
-  m=/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec(s);
+  m=/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i.exec(s);
   if(!m)return 24*60;
-  h=parseInt(m[1],10);min=parseInt(m[2],10);ap=m[3].toUpperCase();
+  h=parseInt(m[1],10);min=m[2]?parseInt(m[2],10):0;ap=m[3].toUpperCase();
   if(ap==="PM"&&h<12)h+=12;
   if(ap==="AM"&&h===12)h=0;
   return h*60+min;
