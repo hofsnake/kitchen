@@ -84,21 +84,26 @@ button,a.btn{font-family:inherit}
 .btn.rst{-webkit-flex:1.4 1 0;flex:1.4 1 0;padding:0 1vmin;font-size:3.4vmin;background:#3a1d1d;border-color:#7a3030}
 .none{color:#aaa;font-size:3.8vmin}
 /* on tv */
-#tvcard{background:#0a2f86;border-color:#1d4eae;overflow:hidden}
-#tvcard .tvhead{display:table;width:100%;margin:0 0 .5vmin;table-layout:fixed}
+#tvcard{background:#0a2f86;border-color:#1d4eae;overflow:hidden;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:0}
+#tvcard .tvhead{display:table;width:100%;margin:0 0 .5vmin;table-layout:fixed;-webkit-flex:0 0 auto;flex:0 0 auto}
 #tvcard .tvhead .label{display:table-cell;vertical-align:middle;margin:0;color:#ffe14a;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:3.2vmin;letter-spacing:.04em}
 #tvcard .btn.ask{display:table-cell;width:22vmin;height:4.2vmin;min-height:4.2vmin;line-height:4.2vmin;padding:0;vertical-align:middle;border-radius:999px;background:#1d9bf0;border-color:#5bb8f5;font-size:1.9vmin;text-align:center}
-#tvcols{display:table;width:100%;table-layout:fixed}
-.tvcol{display:table-cell;vertical-align:top;width:33%;padding:0 .35vmin}
-.tvcol .box{background:#071f5c;border:2px solid #143e9a;border-radius:1.2vmin;padding:.5vmin .4vmin .6vmin;min-height:18vmin}
+#tvcols{display:-webkit-flex;display:flex;width:100%;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:0}
+.tvcol{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-flex:1 1 0;flex:1 1 0;width:33%;min-width:0;padding:0 .35vmin}
+.tvcol .box{--tvscale:1;background:#071f5c;border:2px solid #143e9a;border-radius:1.2vmin;padding:.5vmin .4vmin .6vmin;-webkit-flex:1 1 auto;flex:1 1 auto;min-height:18vmin;min-width:0;overflow:hidden}
 .tvcol.today .box{background:#123a8f;border-color:#ffe14a}
 .tvwhen{display:block;text-align:center;color:#ffe14a;font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;font-size:2.3vmin;letter-spacing:.04em;line-height:1.1}
 .tvdate{display:block;text-align:center;color:#d6e2ff;font-size:1.9vmin;margin:0 0 .4vmin}
-.tvitem{display:block;margin:0 0 .55vmin;padding:.2vmin 0;border-top:1px solid #1d4eae}
-.tvtime{display:block;color:#ffe14a;font-size:20px;font-weight:800;line-height:1.15}
-.tvname{display:block;color:#fff;font-size:21px;font-weight:700;line-height:1.2}
-.tvwhere{display:block;color:#b9d0ff;font-size:16px;line-height:1.2}
-.tvempty{display:block;color:#9db4e6;font-size:20px;font-weight:700;text-align:center;margin-top:.8vmin}
+.tvitem{display:block;margin:0 0 calc(.55vmin * var(--tvscale,1));padding:calc(.2vmin * var(--tvscale,1)) 0;border-top:1px solid #1d4eae}
+.tvtime{display:block;color:#ffe14a;font-size:calc(20px * var(--tvscale,1));font-weight:800;line-height:calc(1.05 + .1 * var(--tvscale,1))}
+.tvname{display:block;color:#fff;font-size:calc(21px * var(--tvscale,1));font-weight:700;line-height:calc(1.1 + .1 * var(--tvscale,1))}
+.tvwhere{display:block;color:#b9d0ff;font-size:calc(16px * var(--tvscale,1));line-height:calc(1.1 + .1 * var(--tvscale,1))}
+.tvempty{display:block;color:#9db4e6;font-size:calc(20px * var(--tvscale,1));font-weight:700;text-align:center;margin-top:.8vmin}
+.tvcol .box[data-tvfit="no-net"] .tvwhere{display:none}
+.tvitem.mavs{margin:0 0 calc(.4vmin * var(--tvscale,1));padding:calc(.22vmin * var(--tvscale,1)) calc(.35vmin * var(--tvscale,1));border:1px solid #4FC3FF;border-radius:.7vmin;background:#002B5E;background:-webkit-linear-gradient(top,#0064B1,#002B5E);background:linear-gradient(180deg,#0064B1 0%,#002B5E 100%);-webkit-box-shadow:0 0 5px #00A3FF;box-shadow:0 0 5px #00A3FF}
+.tvitem.mavs .tvtime,.tvitem.mavs .tvwhere{color:#BBC4CA}
+.tvitem.mavs .tvname{color:#fff}
+.tvitem.mavs .tvname:before{content:"🏀 "}
 /* seasonal mascot */
 #mascot{position:fixed;left:0;top:0;width:78px;height:88px;z-index:6;pointer-events:none;opacity:.78;-webkit-transition:none;transition:none}
 #mascot.off{display:none}
@@ -267,7 +272,7 @@ var PANDORA_STATIONS = [
   { label: "Bruno Mars Radio", url: "https://pandora.app.link/vWsf4ScgR7b" }
 ];
 /* Kitchen build id. build.txt must match so an installed Home Screen app reloads. */
-var KITCHEN_BUILD = "20261108b";
+var KITCHEN_BUILD = "20261112a";
 /* Foodie recipes come from recipes/manifest.json: category -> [[name, slug, driveId]]. */
 var FOODIE_DRIVE_URL = "https://drive.google.com/drive/folders/0B9HMBn2wtvIJMWN3MWczb1dha0k?resourcekey=0-NPgg2e5zaboIKZtEoId4Yg";
 var RECIPE_ORDER = ["Mains", "Soups & Chili", "Sides", "Apps & Snacks", "Sauces & Dressings", "Desserts"];
@@ -855,14 +860,19 @@ function showsOn(data,iso){
   out.sort(function(a,b){return timeKey(a.time)-timeKey(b.time);});
   return out;
 }
+function isMavsShow(it){
+  return /mavs|mavericks/i.test(String((it&&it.show)||""));
+}
 function renderTvCol(id,title,iso,items){
   var el=$(id),h="",i,it;
   if(!el)return;
+  el.style.setProperty("--tvscale","1");
+  el.removeAttribute("data-tvfit");
   h='<div class="tvwhen">'+title+'</div><div class="tvdate">'+esc(prettyDay(iso))+'</div>';
   if(!items.length)h+='<div class="tvempty">Nothing listed</div>';
   for(i=0;i<items.length;i++){
     it=items[i];
-    h+='<div class="tvitem">';
+    h+='<div class="tvitem'+(isMavsShow(it)?" mavs":"")+'">';
     if(it.time)h+='<div class="tvtime">'+esc(it.time)+'</div>';
     h+='<div class="tvname">'+esc(it.show)+'</div>';
     if(it.where)h+='<div class="tvwhere">'+esc(it.where)+'</div>';
@@ -870,11 +880,36 @@ function renderTvCol(id,title,iso,items){
   }
   el.innerHTML=h;
 }
+var fitTvTimer=null;
+function fitTvCol(el){
+  var scale,min,step;
+  if(!el||!el.clientHeight)return;
+  scale=1;min=0.55;step=0.05;
+  el.style.setProperty("--tvscale","1");
+  el.removeAttribute("data-tvfit");
+  while(el.scrollHeight>el.clientHeight+1 && scale>min+0.0001){
+    scale=Math.round((scale-step)*100)/100;
+    if(scale<min)scale=min;
+    el.style.setProperty("--tvscale",String(scale));
+  }
+  if(el.scrollHeight>el.clientHeight+1)el.setAttribute("data-tvfit","no-net");
+}
+function fitTvBoard(){
+  fitTvCol($("tv-yday"));
+  fitTvCol($("tv-today"));
+  fitTvCol($("tv-tom"));
+}
+function scheduleFitTv(){
+  if(fitTvTimer)clearTimeout(fitTvTimer);
+  fitTvTimer=setTimeout(function(){fitTvTimer=null;fitTvBoard();},60);
+}
 function renderTvBoard(data){
   var today=todayStr();
   renderTvCol("tv-yday","YESTERDAY",shiftIso(today,-1),showsOn(data,shiftIso(today,-1)));
   renderTvCol("tv-today","TODAY",today,showsOn(data,today));
   renderTvCol("tv-tom","TOMORROW",shiftIso(today,1),showsOn(data,shiftIso(today,1)));
+  fitTvBoard();
+  scheduleFitTv();
 }
 function loadTv(){
   xhr("tv.json?v="+KITCHEN_BUILD+"&t="+(new Date().getTime()),function(err,j){
@@ -970,6 +1005,9 @@ document.addEventListener("visibilitychange",function(){
   }
 },false);
 
+window.addEventListener("resize",scheduleFitTv,false);
+window.addEventListener("orientationchange",function(){setTimeout(fitTvBoard,250);},false);
+
 /* ---------- Boot ---------- */
 buildTimers();
 renderStations();
@@ -994,7 +1032,7 @@ if($("wxclose"))$("wxclose").addEventListener("click",closeForecast,false);
 loadWx();setInterval(loadWx,30*60*1000);
 // when the iPad wakes or the app returns to the front, refresh everything
 document.addEventListener("visibilitychange",function(){
-  if(!document.hidden){tickClock();checkTimers();loadWx();getLock();}
+  if(!document.hidden){tickClock();checkTimers();loadWx();getLock();fitTvBoard();}
 },false);
 // keep the screen on where Safari supports it
 var lock=null;
