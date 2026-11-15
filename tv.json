@@ -2,90 +2,6 @@
   "weekly": [],
   "dated": [
     {
-      "date": "2026-11-08",
-      "time": "6:30pm",
-      "show": "Mavs vs Nets",
-      "where": "Local TV"
-    },
-    {
-      "date": "2026-11-08",
-      "time": "7pm",
-      "show": "90 Day: The Other Way",
-      "where": "TLC"
-    },
-    {
-      "date": "2026-11-08",
-      "time": "9pm",
-      "show": "Sister Wives",
-      "where": "TLC"
-    },
-    {
-      "date": "2026-11-09",
-      "time": "7pm",
-      "show": "Mavs vs Pacers",
-      "where": "Local TV"
-    },
-    {
-      "date": "2026-11-09",
-      "time": "7pm",
-      "show": "90 Day: Hunt for Love",
-      "where": "TLC"
-    },
-    {
-      "date": "2026-11-09",
-      "time": "8pm",
-      "show": "Hunt for Love: Between the Sheets",
-      "where": "TLC"
-    },
-    {
-      "date": "2026-11-10",
-      "time": "7pm",
-      "show": "RHONY",
-      "where": "Bravo"
-    },
-    {
-      "date": "2026-11-10",
-      "time": "9pm",
-      "show": "The Golden Life",
-      "where": "E!"
-    },
-    {
-      "date": "2026-11-11",
-      "time": "7pm",
-      "show": "RHOSLC",
-      "where": "Bravo"
-    },
-    {
-      "date": "2026-11-12",
-      "time": "",
-      "show": "Mormon Wives: OC premiere, all eps",
-      "where": "Hulu"
-    },
-    {
-      "date": "2026-11-12",
-      "time": "7pm",
-      "show": "RHOC Reunion Pt 2 finale",
-      "where": "Bravo"
-    },
-    {
-      "date": "2026-11-12",
-      "time": "7pm",
-      "show": "The Traitors",
-      "where": "NBC"
-    },
-    {
-      "date": "2026-11-12",
-      "time": "7pm",
-      "show": "Mavs at Timberwolves",
-      "where": "NBA TV"
-    },
-    {
-      "date": "2026-11-12",
-      "time": "8pm",
-      "show": "Southern Charm premiere",
-      "where": "Bravo"
-    },
-    {
       "date": "2026-11-14",
       "time": "6:30pm",
       "show": "Mavs at Cavaliers",
@@ -141,9 +57,9 @@
     },
     {
       "date": "2026-11-18",
-      "time": "8:30pm",
+      "time": "7pm",
       "show": "Mavs vs Warriors",
-      "where": "ESPN"
+      "where": "Local TV"
     },
     {
       "date": "2026-11-19",
@@ -183,6 +99,66 @@
     },
     {
       "date": "2026-11-22",
+      "time": "9pm",
+      "show": "Sister Wives",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-23",
+      "time": "7pm",
+      "show": "90 Day: Hunt for Love",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-23",
+      "time": "8pm",
+      "show": "Between the Sheets",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-24",
+      "time": "7pm",
+      "show": "RHONY",
+      "where": "Bravo"
+    },
+    {
+      "date": "2026-11-24",
+      "time": "9pm",
+      "show": "The Golden Life",
+      "where": "E!"
+    },
+    {
+      "date": "2026-11-24",
+      "time": "9pm",
+      "show": "Mavs at Nuggets",
+      "where": "NBC"
+    },
+    {
+      "date": "2026-11-25",
+      "time": "7pm",
+      "show": "RHOSLC",
+      "where": "Bravo"
+    },
+    {
+      "date": "2026-11-26",
+      "time": "8pm",
+      "show": "Southern Charm",
+      "where": "Bravo"
+    },
+    {
+      "date": "2026-11-27",
+      "time": "8pm",
+      "show": "Mavs at Suns",
+      "where": "Local TV"
+    },
+    {
+      "date": "2026-11-29",
+      "time": "7pm",
+      "show": "90 Day: The Other Way",
+      "where": "TLC"
+    },
+    {
+      "date": "2026-11-29",
       "time": "9pm",
       "show": "Sister Wives",
       "where": "TLC"
